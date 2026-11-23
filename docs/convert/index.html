@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A file of Python written again as Zeno: zeno convert · Zeno</title>
+<meta name="description" content="A program already written in Python can be had as Zeno with one command:">
+<meta property="og:site_name" content="Zeno">
+<meta property="og:title" content="A file of Python written again as Zeno: zeno convert · Zeno">
+<meta property="og:description" content="A program already written in Python can be had as Zeno with one command:">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zeno-lang.org/docs/convert/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://zeno-lang.org/og/home.png">
+<meta property="og:image:secure_url" content="https://zeno-lang.org/og/home.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Zeno, a programming language: code that reads like what it means.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A file of Python written again as Zeno: zeno convert · Zeno">
+<meta name="twitter:description" content="A program already written in Python can be had as Zeno with one command:">
+<meta name="twitter:image" content="https://zeno-lang.org/og/home.png">
+<meta name="twitter:image:alt" content="Zeno, a programming language: code that reads like what it means.">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://zeno-lang.org/docs/convert/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add("js"); try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to the content</a>
+<div class="progress" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
+<header class="nav">
+  <a class="brand" href="/" aria-label="Zeno, home"><svg class="mark" viewBox="-8 -8 291 82" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="15" stroke-linejoin="miter" stroke-miterlimit="3"><polyline points="0,7.5 50,7.5 0,58.5 50,58.5"/><path d="M69.5 33 H120.5 A25.5 25.5 0 1 0 115.09 48.7"/><path d="M148.5 66 V0 M148.5 66 V27.5 A20 20 0 0 1 188.5 27.5 V66"/><path d="M242 7.5 A25.5 25.5 0 1 1 219.48 21.03"/></g><circle class="dot" cx="229.25" cy="10.92" r="7.5"/></svg></a>
+  <nav aria-label="Main"><a href="/learn/">Learn</a><a href="/examples/">Examples</a><a href="/playground/">Playground</a><a href="/packages/">Packages</a><a href="/docs/" aria-current="page">Docs</a><div class="nav-more" id="nav-more"><button type="button" aria-expanded="false" aria-controls="nav-more-list">More<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5L12 15l5.5-5.5"/></svg></button><div class="nav-more-list" id="nav-more-list"><a href="/book/">Book</a><a href="/benchmarks/">Benchmarks</a><a href="/decisions/">Decisions</a><a href="/history/">History</a><a href="/roadmap/">Roadmap</a><a href="/about/">About</a></div></div></nav>
+  <div class="nav-end">
+    <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">
+      <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg><svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <a class="button small ghost nav-gh" href="https://github.com/zeno-src/zeno-lang"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.3-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
+    <a class="button small" href="/download/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 16.5v1.5a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-1.5"/></svg>Download</a>
+  </div>
+</header>
+<main id="content">
+<div class="doc-layout">
+<nav class="doc-nav" aria-label="Docs"><h4>The front end</h4><a href="/docs/lexer/">How the lexer works</a><a href="/docs/parser/">How the parser works</a><a href="/docs/checker/">How the type checker works</a><h4>The engines</h4><a href="/docs/interpreter/">How the interpreter works</a><a href="/docs/vm/">How the bytecode VM works</a><a href="/docs/compiler/">How compiling to C works</a><a href="/docs/llvm/">How the LLVM backend works</a><a href="/docs/minimal/">The least C: zeno build --minimal</a><h4>Memory</h4><a href="/docs/memory/">How memory is managed</a><a href="/docs/ownership/">Owned values: memory freed at a line you can point to</a><a href="/docs/no-collector/">A build with no collector</a><a href="/docs/pool/">The memory pool</a><a href="/docs/text/">Text that is kept</a><a href="/docs/temporaries/">What a statement owns</a><a href="/docs/one-owner/">One owner</a><a href="/docs/enums-and-none/">Enum values and none, with one owner</a><a href="/docs/functions-and-errors/">Functions and errors, with one owner</a><a href="/docs/memory-modes/">Choosing how memory is freed</a><h4>Firmware and hardware</h4><a href="/docs/firmware/">How a firmware build handles errors</a><a href="/docs/board/">How the board and the clock work</a><a href="/docs/inputs/">Inputs: a pin the program reads</a><a href="/docs/serial/">A serial port</a><a href="/docs/analog/">Reading a voltage: an analog pin</a><a href="/docs/sized-ints/">How the bit operators and the sized whole numbers work</a><a href="/docs/f32/">f32: a float of 32 bits</a><a href="/docs/u64/">u64: a whole number of 64 bits with no sign</a><a href="/docs/fixed-lists/">A list of a fixed length</a><a href="/docs/bytes/">Bytes from and to a file</a><a href="/docs/enum-numbers/">An enum whose cases stand for numbers</a><a href="/docs/units-made/">Units made of units: V  A is W</a><h4>The type system</h4><a href="/docs/generics/">How generics work</a><a href="/docs/interfaces/">Interfaces</a><a href="/docs/private/">private</a><h4>Memory by hand</h4><a href="/docs/unsafe/">Memory by hand: unsafe { }, pointers and registers</a><h4>The standard library</h4><a href="/docs/library/">The standard library, part 1: text and lists</a><a href="/docs/reading-and-writing/">The standard library, part 2: reading and writing</a><a href="/docs/running-programs/">Starting another program</a><a href="/docs/ending-a-program/">Ending a program, its environment, and the error stream</a><a href="/docs/math/">The standard library, part 3: more of math</a><a href="/docs/library-in-zeno/">A library written in Zeno: math.hypot, and the module random</a><a href="/docs/dict/">The standard library, part 4: a dictionary</a><a href="/docs/json/">JSON: text that other programs read and write</a><h4>Programs in many files</h4><a href="/docs/modules/">Programs in several files</a><a href="/docs/using-packages/">Using packages: modules from another folder</a><a href="/docs/registry/">The registry: a package by its name</a><h4>The web</h4><a href="/docs/web/">How a Zeno program runs in a web page</a><a href="/docs/playground/">The playground: Zeno in a page, with nothing installed</a><h4>Other languages</h4><a href="/docs/targets/">Targets: a Zeno program written in another language</a><a href="/docs/python/">Libraries of Python</a><a href="/docs/node/">Libraries of JavaScript</a><a href="/docs/java/">Libraries of Java</a><a href="/docs/ruby/">Libraries of Ruby</a><a href="/docs/php/">Libraries of PHP</a><a href="/docs/lua/">Libraries of Lua</a><a href="/docs/csharp/">Libraries of C# and .NET</a><a href="/docs/c/">Libraries of C, Go and Rust</a><a href="/docs/inline/">Another language's code in a Zeno file: inline blocks</a><a href="/docs/convert/" aria-current="page">A file of Python written again as Zeno: zeno convert</a><h4>Tools</h4><a href="/docs/install/">Installing Zeno: a setup program, and one line</a><a href="/docs/packages/">Packages: Zeno for apt, pacman, snap, flatpak, Homebrew and winget</a><a href="/docs/release/">Releasing Zeno: one zeno for each kind of machine</a><a href="/docs/new/">Starting a program: zeno new</a><a href="/docs/testing/">Tests: test, assert and zeno test</a><a href="/docs/format/">The formatter</a><a href="/docs/lsp/">The language server</a><h4>The audit and 0.1</h4><a href="/docs/audit/">The audit: unambiguous and intuitive</a><a href="/docs/gaps/">The gaps programs ran into: +=, and a format on a quantity</a><a href="/docs/version-0.1/">Zeno 0.1: what is in it, and what is not</a><a href="/docs/found-by-the-book/">What writing the book found</a><h4>More</h4><a href="/docs/board-build/">One step to a board: zeno build --board</a><a href="/docs/dict-owned/">A dict that owns its values</a><a href="/docs/files-in-pieces/">A file in pieces</a><a href="/docs/folders/">Folders</a><a href="/docs/generic-owned/">A value with one owner in a generic</a><a href="/docs/inner-functions/">A function inside a function, and a default that is worked out</a><a href="/docs/interrupts/">Interrupts: the board counts a pin's edges</a><a href="/docs/kept-functions/">A function that is kept takes what it uses</a><a href="/docs/method-values/">A method used as a value</a><a href="/docs/missing/">What Zeno does not have yet, and what to do about each</a><a href="/docs/none-list/">A list of numbers that may be none, with no collector</a><a href="/docs/plain-c/">A compiler that is neither GCC nor Clang</a><a href="/docs/plan-9-14/">The plan for items 9 to 14</a><a href="/docs/pool-size/">The size of the pool on the command line, and spare blocks that are checked</a><a href="/docs/pwm/">A PWM signal: a pin on for a share of the time</a><a href="/docs/raises-in-types/">raises in a function type</a><a href="/docs/resource/">Cleaning up when a block ends</a><a href="/docs/several-values/">Several values from one function</a><a href="/docs/stores/">Stores: where each package manager looks for Zeno</a><a href="/docs/take/">take in front of a field or an item</a><a href="/docs/ticker/">A ticker: a steady beat</a></nav>
+<article class="prose">
+  <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg><a href="/docs/">Docs</a></p>
+  <h1>A file of Python written again as Zeno: zeno convert</h1>
+  
+  <p>A program already written in Python can be had as Zeno with one
+command:</p>
+<pre><code>zeno convert shop.py</code></pre>
+<p>It writes <code>shop.zeno</code> beside it, and says what it did:</p>
+<pre><code>Wrote shop.zeno from shop.py.
+  11 pieces: 10 written as Zeno, 1 kept as Python.
+
+  Where Zeno does otherwise than Python (2 lines; each kind has a `# convert:` comment at its first):
+    a value is shown as Zeno shows it: line 29
+    `upper` and `lower` change a to z only: line 26
+
+  Kept as Python, in the `inline python` block:
+    line 2, `import textwrap`: `textwrap` is a module of Python, and what uses it reaches it through the block
+
+  Run it with `zeno run shop.zeno`. It prints what `python3 shop.py` prints,
+  but for the notes above.</code></pre>
+<p>The one promise is that <strong>what is written is never silently wrong</strong>.
+What the converter can say in Zeno it says in Zeno. What it cannot, it
+leaves as Python, in an <a href="/docs/inline/"><code>inline python</code></a> block that the
+lines of Zeno call. So what it writes always runs, prints what the
+Python printed, and the work left is to make the block smaller.</p>
+<p>The decisions behind it are chapter 62 of <a href="/decisions/"><code>decisions.md</code></a>.</p>
+<h2 id="an-example">An example</h2>
+<p><code>shop.py</code>:</p>
+<pre><code># A till: prices, a basket, and a receipt.
+import textwrap
+
+PRICES = {"tea": 2.5, "cake": 3.0, "jam": 1.25}
+
+
+def line_total(item, count):
+    return PRICES[item] * count
+
+
+def receipt(basket):
+    lines = []
+    total = 0.0
+    for item, count in basket.items():
+        cost = line_total(item, count)
+        total += cost
+        lines.append(f"{item:&lt;6} x{count}  {cost:6.2f}")
+    lines.append(f"{'total':&lt;9} {total:6.2f}")
+    return lines
+
+
+basket = {"tea": 2, "jam": 3}
+basket["cake"] = 1
+for line in receipt(basket):
+    print(line)
+words = sorted(word.upper() for word in basket)
+print(", ".join(words))
+note = textwrap.fill("Thank you for shopping with us, and come back soon.", width=24)
+print(note)</code></pre>
+<p><code>shop.zeno</code>, as the converter writes it:</p>
+<pre><code class="zeno"># Written from shop.py by `zeno convert`.
+
+import python
+
+let py = inline python {
+    import textwrap
+}
+
+# convert: Python's `sorted`, a copy of a list with the smallest first.
+function sorted[T is Ordered](items: list[T]) -&gt; list[T] {
+    let copy = items.slice(0)
+    copy.sort()
+    return copy
+}
+
+# A till: prices, a basket, and a receipt.
+
+let PRICES = ["tea": 2.5, "cake": 3.0, "jam": 1.25]
+
+function line_total(item: str, count: int) -&gt; float {
+    return PRICES[item] * count
+}
+
+function receipt(basket: dict[str, int]) -&gt; list[str] {
+    let lines: list[str] = []
+    var total = 0.0
+    for item, count in basket {
+        let cost = line_total(item, count)
+        total += cost
+        lines.append(f"{item:&lt;6} x{count}  {cost:6.2f}")
+    }
+    lines.append(f"{'total':&lt;9} {total:6.2f}")
+    return lines
+}
+
+let basket = ["tea": 2, "jam": 3]
+basket["cake"] = 1
+for line in receipt(basket) {
+    print(line)
+}
+# convert: `upper` and `lower` change a to z only. Python changes every letter
+# that has a capital.
+let words = sorted([word.upper() for word in basket])
+print(words.join(", "))
+let note = py.textwrap.fill("Thank you for shopping with us, and come back soon.", width=24)
+# convert: Zeno shows a value its own way: `true`, `false` and `none` in small
+# letters, a text inside a list, a dict or an object in double quotes, and a
+# dict between `[` and `]`.
+print(note)</code></pre>
+<p>The types came from the program itself: <code>line_total</code> is given a text
+and a whole number at its one call, and gives back a float. <code>textwrap</code>
+is a library of Python that Zeno has no words for, so its <code>import</code>
+stays in the block and <code>fill</code> is called through it, as <code>py.textwrap</code>.</p>
+<h2 id="pieces-and-what-becomes-of-each">Pieces, and what becomes of each</h2>
+<p>The file is cut into <strong>pieces</strong>: the statements that begin at its left
+margin. A <code>def</code> with its body is one piece, a <code>class</code> is one, a <code>for</code>
+loop at the top level is one, and so is each line such as
+<code>basket["cake"] = 1</code>. Each piece ends in one of three states:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>What is written</th>
+<th>In the report</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Zeno</strong></td>
+<td>Lines of Zeno that mean what the piece meant</td>
+<td>Counted as written as Zeno</td>
+</tr>
+<tr>
+<td><strong>Zeno with a note</strong></td>
+<td>The same, with a <code># convert:</code> comment where Zeno does something a reader of Python would not expect</td>
+<td>Under "Where Zeno does otherwise", with every line it applies to</td>
+</tr>
+<tr>
+<td><strong>Kept</strong></td>
+<td>The piece as it was written, in the <code>inline python</code> block</td>
+<td>Under "Kept as Python", with the reason and its line</td>
+</tr>
+</tbody>
+</table>
+<p>A comment is written once for each kind of note, above the first line
+it applies to. The report lists every line.</p>
+<p>A kept <code>def</code>, <code>class</code> or <code>import</code> sits at the top of the block, and
+the Zeno reaches it through the block: <code>py.fill(...)</code>, <code>py.Meter(...)</code>.
+A kept line that does something, such as a loop, becomes a function of
+the block, <code>def convert_step_1():</code>, that the Zeno calls in its place,
+so it runs exactly where it ran in the Python:</p>
+<pre><code class="zeno">let py = inline python {
+    def convert_step_1():
+        global total
+        for row in rows:
+            total += parse(row)
+}
+
+py.convert_step_1()
+print(py.total)</code></pre>
+<p>The block is named <code>py</code>. If the file has a name <code>py</code> already, it is
+named <code>kept</code>, or <code>python_part</code>.</p>
+<h2 id="what-is-written-as-zeno">What is written as Zeno</h2>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Zeno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x = 1</code>, given again later</td>
+<td><code>var x = 1</code>; given once, <code>let x = 1</code></td>
+</tr>
+<tr>
+<td>A name first given a value inside a block and used after it</td>
+<td>Declared before the block, with the first value of its type: <code>var name: str = ""</code></td>
+</tr>
+<tr>
+<td><code>def f(a, b=2):</code></td>
+<td><code>function f(a: int, b: int = 2) -&gt; int {</code>: the types from what the program gives it and what it gives back</td>
+</tr>
+<tr>
+<td>A parameter given a new value in the function</td>
+<td><code>function f(n_given: int)</code> and <code>var n = n_given</code>, since a parameter of Zeno cannot change</td>
+</tr>
+<tr>
+<td><code>class</code> whose <code>__init__</code> only puts its parameters and fixed values into fields, and its methods</td>
+<td><code>class</code> with fields and methods</td>
+</tr>
+<tr>
+<td><code>@dataclass</code></td>
+<td><code>class</code>; a field with a default is still given a value by <code>Point(1, 2)</code></td>
+</tr>
+<tr>
+<td><code>True</code>, <code>False</code>, <code>None</code></td>
+<td><code>true</code>, <code>false</code>, <code>none</code></td>
+</tr>
+<tr>
+<td><code>if x:</code></td>
+<td>The question asked out: <code>x != 0</code>, <code>x != ""</code>, <code>len(x) &gt; 0</code>, <code>x is not none</code></td>
+</tr>
+<tr>
+<td><code>x if c else y</code></td>
+<td><code>if c { ... } else { ... }</code>, or <code>y</code> and then <code>x</code> if <code>c</code> where that changes nothing</td>
+</tr>
+<tr>
+<td><code>a and b</code> as a value, between bools</td>
+<td><code>a and b</code></td>
+</tr>
+<tr>
+<td>f-strings, with <code>:&lt;6</code>, <code>:6.2f</code>, <code>:x</code>, <code>:08b</code></td>
+<td>f-strings of Zeno, which take the same</td>
+</tr>
+<tr>
+<td><code>xs[-1]</code></td>
+<td><code>xs[len(xs) - 1]</code></td>
+</tr>
+<tr>
+<td><code>xs[1:10]</code>, <code>s[-3:]</code></td>
+<td><code>xs.slice(min(1, len(xs)), min(10, len(xs)))</code>, <code>s.slice(max(len(s) - 3, 0))</code>: an end past the end is cut as Python cuts it</td>
+</tr>
+<tr>
+<td><code>for k, v in d.items():</code>, <code>for i, x in enumerate(xs):</code></td>
+<td><code>for k, v in d {</code>, <code>for i, x in xs {</code></td>
+</tr>
+<tr>
+<td><code>for name, age in [("ann", 30), ("bob", 41)]:</code></td>
+<td><code>for row_1, name in ["ann", "bob"] {</code> and <code>let age = [30, 41][row_1]</code></td>
+</tr>
+<tr>
+<td>A loop's variable read after the loop</td>
+<td>The loop counts with <code>word_item</code>, and its first line gives <code>word</code> its value</td>
+</tr>
+<tr>
+<td><code>[x * 2 for x in xs if x &gt; 0]</code></td>
+<td>The same in Zeno</td>
+</tr>
+<tr>
+<td><code>sum(x for x in xs)</code>, and in <code>min</code>, <code>max</code>, <code>sorted</code>, <code>list</code>, <code>join</code></td>
+<td>A list made from a loop: these take every item before they give anything</td>
+</tr>
+<tr>
+<td><code>try:</code> / <code>except ValueError as e:</code> / <code>raise KeyError(k)</code></td>
+<td><code>try { } except ValueError as e { }</code>, <code>raise KeyError(k)</code></td>
+</tr>
+<tr>
+<td><code>if __name__ == "__main__":</code></td>
+<td>Its block, at the top level</td>
+</tr>
+<tr>
+<td><code>round(x)</code></td>
+<td><code>math.round(x)</code>, with a note</td>
+</tr>
+<tr>
+<td><code>chr</code>, <code>ord(c)</code>, <code>s.startswith</code>, <code>s.splitlines()</code>, <code>sep.join(xs)</code></td>
+<td><code>char</code>, <code>c.code()</code>, <code>s.starts_with</code>, <code>s.lines()</code>, <code>xs.join(sep)</code></td>
+</tr>
+<tr>
+<td><code>xs.copy()</code>, <code>list(xs)</code>, <code>list(d.keys())</code></td>
+<td><code>xs.slice(0)</code>, <code>d.keys()</code></td>
+</tr>
+<tr>
+<td><code>del d[k]</code></td>
+<td><code>d.pop(k)</code></td>
+</tr>
+<tr>
+<td><code>import math</code>, <code>from math import sqrt, pi</code></td>
+<td><code>import math</code>, <code>math.sqrt</code>, <code>math.pi</code></td>
+</tr>
+<tr>
+<td><code>sys.argv[1:]</code>, <code>sys.exit(n)</code></td>
+<td><code>program.arguments()</code>, <code>program.exit(n)</code></td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Where they were</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-python-has-and-zeno-has-not">What Python has and Zeno has not</h3>
+<p>A few things Python has are not in Zeno. Where a file uses one, it gets
+a small function of Zeno that does it, once, at the top, with a
+comment that says what it is:</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>The function written for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sorted(xs)</code>, <code>sorted(d)</code></td>
+<td><code>sorted[T is Ordered](items: list[T]) -&gt; list[T]</code></td>
+</tr>
+<tr>
+<td><code>xs.remove(x)</code></td>
+<td><code>remove_item[T](items: list[T], item: T) raises ValueError</code></td>
+</tr>
+<tr>
+<td><code>text.split(by, most)</code></td>
+<td><code>split_at_most(text: str, by: str, most: int) -&gt; list[str]</code></td>
+</tr>
+<tr>
+<td><code>"-" * 20</code></td>
+<td><code>repeated(text: str, count: int) -&gt; str</code></td>
+</tr>
+</tbody>
+</table>
+<p>A file that has a name of its own the same as one of these keeps the
+line that would need it. (<code>sorted</code> is the exception: a file that gives
+the name <code>sorted</code> a meaning of its own uses that one.)</p>
+<h2 id="what-is-kept-and-why">What is kept, and why</h2>
+<p>A piece is kept for one reason, which the report gives with the line
+it is on. The usual ones:</p>
+<ul>
+<li><strong>What Zeno does not have yet</strong>: <code>lambda</code>, a function inside a
+  function, a generator (<code>yield</code>), a decorator other than <code>@dataclass</code>,
+  <code>*args</code>, a class with a base, a method with two underscores at each
+  end, a tuple kept as a value, <code>%</code> formatting, <code>print(..., end="")</code>,
+  <code>with</code> and <code>open</code>, <code>input</code>.</li>
+<li><strong>What Zeno would do otherwise</strong>: <code>==</code> between objects that are not
+  dataclasses, printing an object that is not a dataclass, a default
+  that is a list or a dict (Python makes it once, Zeno each call),
+  <code>sort(key=...)</code>, <code>find</code>, a bare <code>except:</code>, a loop whose block, or a
+  function it calls, changes the list it goes over.</li>
+<li><strong>A name that is a word of Zeno</strong>: a variable called <code>match</code>, <code>len</code>
+  given another meaning, and the like.</li>
+<li><strong>A type the converter cannot tell</strong>: a value that only Python knows
+  (one that came from the block) used in arithmetic, a dict whose keys
+  are not texts or whole numbers.</li>
+<li><strong>What the rest needs</strong>: a piece that gives a value a kept piece
+  reads, and the rules below.</li>
+</ul>
+<h3 id="what-crosses-between-zeno-and-the-block">What crosses between Zeno and the block</h3>
+<p>The lines of Zeno and the block are two sides, and a value crosses
+from one to the other as the bridge to Python (<a href="/docs/python/"><code>python.md</code></a>)
+takes it. A number, a text, a bool and <code>none</code> cross exactly. A value
+of Python's own, such as an object a kept class made, stays in Python,
+and Zeno holds it as a handle. A list or a dict of Zeno given to
+Python is copied, and what Python did to its copy would not be seen
+by the Zeno. So:</p>
+<ul>
+<li>A call into the block may be given numbers, texts, bools, <code>none</code>
+  and values of Python's own; and a list or a dict written right there
+  in the call, which nothing else holds. Otherwise the piece is kept.</li>
+<li>A piece that gives a value to a name that a kept piece reads is kept
+  too, if the kept piece can run after it: it is further down the file,
+  or it is a function or a class. Python can only call Python.</li>
+<li>A name that a kept piece and a piece of Zeno both give values is a
+  variable on each side. A line of Zeno after the kept piece must read
+  a value Zeno gave the name there, and if it may not, it is kept, with
+  the reason "<code>n</code> may still hold here the value that the piece at line
+  3 gave it".</li>
+<li>The variable of a kept loop that no other piece reads after the loop
+  is that loop's own, and a loop of Zeno with a variable of the same
+  name has nothing to do with it.</li>
+<li>An <code>import</code> of a module that Zeno has words for, and a name given one
+  fixed value once in the whole file (<code>LIMIT = 10</code>), are written on both
+  sides.</li>
+</ul>
+<h3 id="how-a-piece-is-chosen-to-be-kept">How a piece is chosen to be kept</h3>
+<p>The types come from rounds over the whole file: what a function is
+given at its calls, what it gives back, what goes into a list, a dict,
+a field. A round may learn something the round before did not know,
+so there are rounds until nothing more is learned (twelve at most).</p>
+<p>Then the last round writes every piece. If some cannot be written,
+<strong>one</strong> is kept: the first whose reason is its own, and not "the type
+is not known". All is then done again. One piece at a time, because
+what one piece cannot be written for is often what another became: a
+name holds a function because the line that gives it one is kept, a
+type is not known because a value came from the block.</p>
+<p>Last, what was written is read by Zeno's own checker, in the same
+program. A piece that it does not take is kept, with the checker's
+words as the reason. Nothing that Zeno would refuse is given out.</p>
+<h2 id="the-notes">The notes</h2>
+<p>Each note is a place where the Zeno runs and does what the Python did,
+but prints or raises something a little otherwise.</p>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A value is shown as Zeno shows it</td>
+<td><code>print</code> and f-strings show <code>true</code>, <code>false</code>, <code>none</code> in small letters, a text inside a list in double quotes, a dict between <code>[</code> and <code>]</code>. Written where such a value is printed, and where a value of Python's own is printed, which may be one</td>
+</tr>
+<tr>
+<td>A float is shown, and a very large or very small one is written otherwise</td>
+<td>Python's <code>1e+16</code> is <code>1e16</code> in Zeno, and <code>1e-07</code> is <code>1e-7</code>. Every other float is shown as Python shows it</td>
+</tr>
+<tr>
+<td>The message of an error is Zeno's own</td>
+<td>Where Zeno raised the error itself, its message is in Zeno's words. An error out of the kept Python has its kind in front of its message</td>
+</tr>
+<tr>
+<td>An <code>except</code> also catches errors only Zeno raises</td>
+<td>Zeno raises an error where Python raises none: a whole number past 64 bits (<code>OverflowError</code>), an item at a place below zero that a variable holds (<code>IndexError</code>), a whole number to a power below zero (<code>ValueError</code>). An <code>except</code> of that kind catches these too</td>
+</tr>
+<tr>
+<td><code>upper</code> and <code>lower</code> change a to z only</td>
+<td>Python changes every letter that has a capital</td>
+</tr>
+<tr>
+<td><code>math.round</code> takes a half away from zero</td>
+<td>2.5 to 3, where Python's <code>round</code> takes it to the even number, 2</td>
+</tr>
+<tr>
+<td>A variable is a float from its first value</td>
+<td>It holds a float later, and a variable of Zeno has one type. In Python it was a whole number until then, and is printed as one</td>
+</tr>
+</tbody>
+</table>
+<p>The test programs in <a href="https://github.com/zeno-src/zeno-lang/blob/main/tools/convert"><code>tools/convert</code></a> that differ
+in this way have a file <code>x.expect</code> with what Zeno prints, and the check
+holds the report to having a note that says why.</p>
+<h2 id="what-it-does-not-promise">What it does not promise</h2>
+<ul>
+<li><strong>A program that stops with an error that Python finds while it
+  runs</strong>: a name used before it has a value (<code>NameError</code>,
+  <code>UnboundLocalError</code>). A name the converter declares before a block
+  has the first value of its type, where Python would stop.</li>
+<li><strong>Whole numbers past 64 bits.</strong> Python's have no end. Zeno stops
+  with <code>OverflowError</code> where a sum goes past, so this is never silent
+  but for one thing: <code>int()</code> of a float past 64 bits gives the largest
+  whole number Zeno has.</li>
+<li><strong>The types a kept function says it gives.</strong> <code>def f() -&gt; int:</code> in
+  the block is believed: what crosses is checked by the bridge.</li>
+<li><strong>The same list reached by two names</strong> while a loop goes over it
+  under one of them.</li>
+<li><strong><code>strip</code>, <code>split</code> and <code>splitlines</code></strong> on spaces outside ASCII, such as
+  a non-breaking space, which Python counts as space and Zeno does not.</li>
+<li><strong>What an <code>import</code> of the block does when it is run</strong>: it runs when
+  the block is made, at the top of the program, and not where the
+  <code>import</code> was.</li>
+<li><strong>The last digit of <code>sin</code>, <code>cos</code> and the like</strong>, which comes from
+  the C library of the machine.</li>
+</ul>
+<h2 id="checking-it">Checking it</h2>
+<pre><code>python3 tools/convert.py           # every program in tools/convert
+python3 tools/convert.py lists     # one</code></pre>
+<p>Each program of Python in <a href="https://github.com/zeno-src/zeno-lang/blob/main/tools/convert"><code>tools/convert</code></a> is
+converted, run with <code>python3</code> and with <code>zeno run</code>, and what the two
+print is compared. The first line of each says how many pieces are to
+be kept (<code># kept: 2</code>), so a rule that stops working is seen. One of
+them, <code>library.py</code>, is a program of 240 lines with classes, a
+dataclass, dicts of objects, exceptions, f-strings and a report, and is
+written as Zeno but for its <code>import json</code>. The GitHub workflow
+<code>convert.yml</code> runs this on every push that changes the converter, with
+<code>cargo test convert</code>.</p>
+<h2 id="where-it-is">Where it is</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it has</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/convert.rs</code></td>
+<td>The command, the notes and the report</td>
+</tr>
+<tr>
+<td><code>src/convert_python.rs</code></td>
+<td>Reading Python: the tokens, the pieces, the tree of each piece</td>
+</tr>
+<tr>
+<td><code>src/convert_python_write.rs</code></td>
+<td>The pieces, what they define and use, which are kept, the rounds, the plan of where each name is declared, the block</td>
+</tr>
+<tr>
+<td><code>src/convert_python_values.rs</code></td>
+<td>Writing an expression of Python as Zeno, with its type</td>
+</tr>
+<tr>
+<td><code>src/convert_python_lines.rs</code></td>
+<td>Writing a statement, a function and a class</td>
+</tr>
+<tr>
+<td><code>tools/convert.py</code>, <code>tools/convert/</code></td>
+<td>The programs and the check</td>
+</tr>
+</tbody>
+</table>
+<p>C is the next language it is to read: a file of C written as Zeno,
+with what it cannot read left in an <code>inline c</code> block.</p>
+  <p class="source">This page is <a href="https://github.com/zeno-src/zeno-lang/blob/main/docs/convert.md">docs/convert.md</a> in the language repository.</p>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="/docs/inline/"><span>Previous</span>Another language's code in a Zeno file: inline blocks</a><a class="next" href="/docs/install/"><span>Next</span>Installing Zeno: a setup program, and one line</a></nav>
+</article>
+<aside class="doc-toc"><h4>On this page</h4><ul><li><a href="#an-example">An example</a></li><li><a href="#pieces-and-what-becomes-of-each">Pieces, and what becomes of each</a></li><li><a href="#what-is-written-as-zeno">What is written as Zeno</a></li><li><a href="#what-is-kept-and-why">What is kept, and why</a></li><li><a href="#the-notes">The notes</a></li><li><a href="#what-it-does-not-promise">What it does not promise</a></li><li><a href="#checking-it">Checking it</a></li><li><a href="#where-it-is">Where it is</a></li></ul></aside>
+</div>
+</main>
+<footer class="foot">
+<div class="foot-inner">
+  <div class="chase" aria-hidden="true">
+    <i class="tick" style="left:50%"></i><i class="tick" style="left:75%"></i><i class="tick" style="left:87.5%"></i>
+    <span class="runner" id="runner"></span><svg class="tortoise" viewBox="0 44 128 80" aria-hidden="true"><g transform="translate(0 6)"><clipPath id="tortoise-shell"><path d="M10 82 A44 44 0 0 1 98 82 Z"/></clipPath><g fill="var(--signal)" clip-path="url(#tortoise-shell)"><rect x="10" y="30" width="41.5" height="60"/><rect x="56.5" y="30" width="17" height="60"/><rect x="78.5" y="30" width="19.5" height="60"/></g><path fill="currentColor" fill-rule="evenodd" d="M4 91 L12 87 H98 C98 76 104 69 111 69 C118 69 123 74 123 81 C123 90 115 96 106 96 H12 Z M22 96 H40 V106 a4 4 0 0 1 -4 4 H26 a4 4 0 0 1 -4 -4 Z M70 96 H88 V106 a4 4 0 0 1 -4 4 H74 a4 4 0 0 1 -4 -4 Z M113.5 77.2 a2.7 2.7 0 1 0 0.01 0 Z"/></g></svg>
+  </div>
+  <div class="chase-text"><p>Every journey is halfway done. Forever.</p><span id="chase-count">The runner has closed 0 of 1 halves</span></div>
+  <p class="foot-about">Zeno of Elea said Achilles can never catch the tortoise: first he must cover half the distance, then half of what is left, without end. It suits a compiler that will always be almost finished. The bar at the top of each page works the same way.</p>
+  <div class="foot-links">
+    <div><h4>Learn</h4><a href="/learn/">The guide</a><a href="/download/">Download</a><a href="/examples/">Examples</a><a href="/packages/">Packages</a><a href="/book/">The Zeno Book</a><a href="/book/zeno-book.pdf">The book as a PDF</a></div>
+    <div><h4>Understand</h4><a href="/docs/">How the compiler works</a><a href="/decisions/">Design decisions</a><a href="/history/">History</a><a href="/roadmap/">Roadmap</a></div>
+    <div><h4>Project</h4><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="https://github.com/zeno-src/zeno-lang">Source on GitHub</a><a href="mailto:contact@zeno-lang.org">contact@zeno-lang.org</a></div>
+  </div>
+  <div class="foot-row"><span>Made by Partha</span><span>Plain HTML, no framework, no build step</span></div>
+</div>
+</footer>
+<script src="/assets/main.js"></script>
+</body>
+</html>

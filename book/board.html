@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>29 The Board · The Zeno Book</title>
+  <title>31 The Board · The Zeno Book</title>
   <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
   </style>
   <link rel="stylesheet" href="book.css">
 <meta property="og:site_name" content="Zeno">
-<meta property="og:title" content="29 The Board · The Zeno Book">
+<meta property="og:title" content="31 The Board · The Zeno Book">
 <meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeno-lang.org/book/board.html">
@@ -103,7 +103,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="29 The Board · The Zeno Book">
+<meta name="twitter:title" content="31 The Board · The Zeno Book">
 <meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
 <meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
@@ -176,41 +176,45 @@ class="number">22</span> Packages</a></li>
 class="number">23</span> Libraries of Other Languages</a></li>
 <li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
 class="number">24</span> Libraries of C</a></li>
+<li><a href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
 <li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
-class="number">25</span> Reading and Writing</a></li>
+class="number">27</span> Reading and Writing</a></li>
 <li><a href="math.html" id="toc-ch-math"><span
-class="number">26</span> Mathematics</a></li>
+class="number">28</span> Mathematics</a></li>
 <li><a href="testing.html" id="toc-ch-testing"><span
-class="number">27</span> Testing</a></li>
+class="number">29</span> Testing</a></li>
 <li><a href="tools.html" id="toc-ch-tools"><span
-class="number">28</span> The Tools</a></li>
+class="number">30</span> The Tools</a></li>
 </ul></li>
 <li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
 a Machine</a>
 <ul>
 <li><a class="here" href="board.html" id="toc-ch-board"><span
-class="number">29</span> The Board</a></li>
+class="number">31</span> The Board</a></li>
 <li><a href="compiling.html" id="toc-ch-compiling"><span
-class="number">30</span> Compiling</a></li>
+class="number">32</span> Compiling</a></li>
 <li><a href="memory.html" id="toc-ch-memory"><span
-class="number">31</span> Memory</a></li>
+class="number">33</span> Memory</a></li>
 <li><a href="ownership.html" id="toc-ch-ownership"><span
-class="number">32</span> Ownership</a></li>
+class="number">34</span> Ownership</a></li>
 <li><a href="firmware.html" id="toc-ch-firmware"><span
-class="number">33</span> Firmware</a></li>
+class="number">35</span> Firmware</a></li>
 <li><a href="no-collector.html" id="toc-ch-no-collector"><span
-class="number">34</span> Building with No Collector</a></li>
+class="number">36</span> Building with No Collector</a></li>
 <li><a href="unsafe.html" id="toc-ch-unsafe"><span
-class="number">35</span> Unsafe Code</a></li>
+class="number">37</span> Unsafe Code</a></li>
 <li><a href="web.html" id="toc-ch-web"><span
-class="number">36</span> A Program in a Web Page</a></li>
+class="number">38</span> A Program in a Web Page</a></li>
 </ul></li>
 <li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
 <ul>
 <li><a href="inside.html" id="toc-ch-inside"><span
-class="number">37</span> Inside Zeno</a></li>
+class="number">39</span> Inside Zeno</a></li>
 <li><a href="design.html" id="toc-ch-design"><span
-class="number">38</span> Why Zeno Is as It Is</a></li>
+class="number">40</span> Why Zeno Is as It Is</a></li>
 <li><a href="keywords.html" id="toc-app-keywords"><span
 class="number">A</span> Keywords</a></li>
 <li><a href="operators.html" id="toc-app-operators"><span
@@ -231,17 +235,17 @@ class="number">G</span> What Zeno Does Not Have Yet</a></li>
 <main>
 <nav class="pager top">
 <a class="prev" href="zeno-on-a-machine.html" rel="previous">← Zeno on a Machine</a>
-<a class="next" href="compiling.html" rel="next"><span class="number">30</span> Compiling →</a>
+<a class="next" href="compiling.html" rel="next"><span class="number">32</span> Compiling →</a>
 </nav>
 <article>
 <h2 class="chapter unnumbered" id="ch-board"><span
-class="number">29</span> The Board</h2>
+class="number">31</span> The Board</h2>
 <p>Zeno is for programs that run on a board: a microcontroller with pins
 that drive LEDs and relays, registers that control its peripherals, and
 a clock. This chapter is about the <code>board</code> module, which is
 how a program reaches them, and about the simulated board that lets the
 same program run on a computer.</p>
-<h3 class="unnumbered" id="blink"><span class="number">29.1</span>
+<h3 class="unnumbered" id="blink"><span class="number">31.1</span>
 Blink</h3>
 <p>The program Zeno was made for, written on the first day, before there
 was a compiler, is this:</p>
@@ -258,7 +262,7 @@ style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><sp
 half second, until Ctrl-C stops it. Compiled for a microcontroller, the
 same lines blink the LED.</p>
 <h3 class="unnumbered" id="the-simulated-board"><span
-class="number">29.2</span> The simulated board</h3>
+class="number">31.2</span> The simulated board</h3>
 <p>A computer has no LED on pin 13, so <code>zeno run</code> gives the
 program a <em>simulated</em> board. It has 64 pins, all low to begin
 with, with the LED on pin 13, where an Arduino Uno has it. It prints a
@@ -278,7 +282,7 @@ led off
 false</code></pre>
 <p>The second <code>led.on()</code> printed nothing, because the pin was
 already high and did not move.</p>
-<h3 class="unnumbered" id="pins"><span class="number">29.3</span>
+<h3 class="unnumbered" id="pins"><span class="number">31.3</span>
 Pins</h3>
 <p><code>led</code> is the pin the LED is on, and <code>pin(n)</code> is
 the pin with that number. A pin can do four things:</p>
@@ -349,7 +353,7 @@ blinking an LED should not need one. A pin is a kind of its own to the
 checker, and a plain number in the compiled program, so it costs what an
 <code>int</code> costs. Units work the same way. (Decision 3.15.)</p>
 </div>
-<h3 class="unnumbered" id="inputs"><span class="number">29.4</span>
+<h3 class="unnumbered" id="inputs"><span class="number">31.4</span>
 Inputs</h3>
 <p>A button, a switch or a sensor that says yes or no is a pin the
 program reads. <code>input_pin(n)</code> makes the pin with that number
@@ -431,7 +435,7 @@ can take one. (Decision 45.)</p>
 <p>The example <code>examples/doorbell.zeno</code> counts presses of a
 button and rings a bell for each.</p>
 <h3 class="unnumbered" id="reading-a-voltage"><span
-class="number">29.5</span> Reading a voltage</h3>
+class="number">31.5</span> Reading a voltage</h3>
 <p>Most of what a board measures arrives as a voltage: a potentiometer,
 a thermistor, a battery through two resistors.
 <code>analog_pin(n)</code> gives an <code>AnalogPin</code>, read by the
@@ -497,7 +501,7 @@ of the scale or a lookup table. (Decision 47.)</p>
 <p>The example <code>examples/battery.zeno</code> watches a battery
 through a divider and lights the LED when it is low.</p>
 <h3 class="unnumbered" id="a-pin-on-for-a-share-of-the-time"><span
-class="number">29.6</span> A pin on for a share of the time</h3>
+class="number">31.6</span> A pin on for a share of the time</h3>
 <p>A pin is only ever high or low. Switched fast by a timer of the chip,
 it dims a lamp, sets the speed of a motor and tells a servo where to
 turn. The signal is called PWM, and <code>pwm_pin(n, frequency)</code>
@@ -571,7 +575,7 @@ it flat out. (Decision 48.)</p>
 <p>The example <code>examples/dimmer.zeno</code> fades a lamp and sweeps
 a servo.</p>
 <h3 class="unnumbered" id="a-steady-beat"><span
-class="number">29.7</span> A steady beat</h3>
+class="number">31.7</span> A steady beat</h3>
 <p>A loop that ends with <code>sleep(10 ms)</code> takes 10 ms and the
 time its work took, so it runs slow, by a different amount each round.
 <code>ticker(10 ms)</code> gives a <code>Ticker</code>, whose ticks are
@@ -650,7 +654,7 @@ things. (Decision 49.)</p>
 </div>
 <p>The example <code>examples/steady.zeno</code> is a loop that notices
 the round that took too long.</p>
-<h3 class="unnumbered" id="interrupts"><span class="number">29.8</span>
+<h3 class="unnumbered" id="interrupts"><span class="number">31.8</span>
 Interrupts</h3>
 <p>A pulse from a wheel sensor is over in a millisecond. A program that
 looks at the pin now and then misses most of them. A chip’s answer is
@@ -730,7 +734,7 @@ inside the interrupt itself, stays in C. (Decision 50.)</p>
 <p>The example <code>examples/tachometer.zeno</code> counts the turns of
 a wheel in each stretch of time.</p>
 <h3 class="unnumbered" id="a-serial-port"><span
-class="number">29.9</span> A serial port</h3>
+class="number">31.9</span> A serial port</h3>
 <p>A serial port is how a board talks: to a terminal on a computer, to a
 GPS module, to a modem. <code>serial(n, speed)</code> opens the port
 with that number, at a speed in <code>baud</code>, and gives a
@@ -801,7 +805,7 @@ byte waits, which is what a console or a modem wants, and
 </div>
 <p>The example <code>examples/console.zeno</code> is a small command
 line over a serial port that drives the LED.</p>
-<h3 class="unnumbered" id="the-clock"><span class="number">29.10</span>
+<h3 class="unnumbered" id="the-clock"><span class="number">31.10</span>
 The clock</h3>
 <p><code>sleep</code> waits for a time with a unit, and
 <code>now()</code> reads a clock that only goes forward, in
@@ -816,7 +820,7 @@ style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><sp
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> took = now() - start</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>print(<span class="st">&quot;took at least 50 ms:&quot;</span>, took &gt;= <span class="dv">50</span> ms)</span></code></pre></div>
 <pre class="Output" data-language="Output" style="outputstyle"><code>took at least 50 ms: true</code></pre>
-<h3 class="unnumbered" id="registers"><span class="number">29.11</span>
+<h3 class="unnumbered" id="registers"><span class="number">31.11</span>
 Registers</h3>
 <p>A microcontroller’s peripherals, its timers, serial ports and
 converters, are controlled through <em>registers</em>: words of memory
@@ -860,7 +864,7 @@ written, and each write is printed. On a real board it is the real
 address. <a href="unsafe.html#ch-unsafe">Unsafe Code</a> is about
 <code>unsafe</code> and memory by hand.</p>
 <h3 class="unnumbered" id="a-traffic-light"><span
-class="number">29.12</span> A traffic light</h3>
+class="number">31.12</span> A traffic light</h3>
 <p>This program from the <code>examples</code> folder is a traffic light
 on three pins, written as a state machine with an enum. Its times are
 short, so the whole run takes a fifth of a second:</p>
@@ -961,7 +965,7 @@ pin 2 on
 led on
 took at least 200 ms: true</code></pre>
 <h3 class="unnumbered" id="a-real-board-underneath"><span
-class="number">29.13</span> A real board underneath</h3>
+class="number">31.13</span> A real board underneath</h3>
 <p>A compiled program meets the hardware in four C functions, and these,
 with the number of pins, are everything Zeno knows about a board:</p>
 <pre class="Output" data-language="Output" style="outputstyle"><code>zeno_board_write(pin, level)   drive a pin high or low
@@ -1009,7 +1013,7 @@ exist or a wait below zero, are done once above them, for every board,
 so the four can be four lines each. (Decision 5.12.)</p>
 </div>
 <h3 class="unnumbered" id="what-the-board-does-not-have-yet"><span
-class="number">29.14</span> What the board does not have yet</h3>
+class="number">31.14</span> What the board does not have yet</h3>
 <p>On a computer nothing can press a button yet, and no voltage can be
 fed to a pin there. No function of the program runs by itself when a pin
 changes or a tick comes: the board counts, and the program asks. I2C and
@@ -1056,7 +1060,7 @@ than half a second.</p></li>
 </article>
 <nav class="pager bottom">
 <a class="prev" href="zeno-on-a-machine.html" rel="previous">← Zeno on a Machine</a>
-<a class="next" href="compiling.html" rel="next"><span class="number">30</span> Compiling →</a>
+<a class="next" href="compiling.html" rel="next"><span class="number">32</span> Compiling →</a>
 </nav>
 <footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
 </main>

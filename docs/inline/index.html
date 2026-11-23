@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Another language's code in a Zeno file: inline blocks · Zeno</title>
+<meta name="description" content="Some code is already written, and is in another language: a checksum out of a board&#x27;s firmware, a few lines of Python that use a library, a function of JavaScript from a page. An inline block holds it in a .zeno file as it was written, and the…">
+<meta property="og:site_name" content="Zeno">
+<meta property="og:title" content="Another language&#x27;s code in a Zeno file: inline blocks · Zeno">
+<meta property="og:description" content="Some code is already written, and is in another language: a checksum out of a board&#x27;s firmware, a few lines of Python that use a library, a function of JavaScript from a page. An inline block holds it in a .zeno file as it was written, and the…">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zeno-lang.org/docs/inline/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://zeno-lang.org/og/home.png">
+<meta property="og:image:secure_url" content="https://zeno-lang.org/og/home.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Zeno, a programming language: code that reads like what it means.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Another language&#x27;s code in a Zeno file: inline blocks · Zeno">
+<meta name="twitter:description" content="Some code is already written, and is in another language: a checksum out of a board&#x27;s firmware, a few lines of Python that use a library, a function of JavaScript from a page. An inline block holds it in a .zeno file as it was written, and the…">
+<meta name="twitter:image" content="https://zeno-lang.org/og/home.png">
+<meta name="twitter:image:alt" content="Zeno, a programming language: code that reads like what it means.">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://zeno-lang.org/docs/inline/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script>document.documentElement.classList.add("js"); try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to the content</a>
+<div class="progress" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
+<header class="nav">
+  <a class="brand" href="/" aria-label="Zeno, home"><svg class="mark" viewBox="-8 -8 291 82" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="15" stroke-linejoin="miter" stroke-miterlimit="3"><polyline points="0,7.5 50,7.5 0,58.5 50,58.5"/><path d="M69.5 33 H120.5 A25.5 25.5 0 1 0 115.09 48.7"/><path d="M148.5 66 V0 M148.5 66 V27.5 A20 20 0 0 1 188.5 27.5 V66"/><path d="M242 7.5 A25.5 25.5 0 1 1 219.48 21.03"/></g><circle class="dot" cx="229.25" cy="10.92" r="7.5"/></svg></a>
+  <nav aria-label="Main"><a href="/learn/">Learn</a><a href="/examples/">Examples</a><a href="/playground/">Playground</a><a href="/packages/">Packages</a><a href="/docs/" aria-current="page">Docs</a><div class="nav-more" id="nav-more"><button type="button" aria-expanded="false" aria-controls="nav-more-list">More<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5L12 15l5.5-5.5"/></svg></button><div class="nav-more-list" id="nav-more-list"><a href="/book/">Book</a><a href="/benchmarks/">Benchmarks</a><a href="/decisions/">Decisions</a><a href="/history/">History</a><a href="/roadmap/">Roadmap</a><a href="/about/">About</a></div></div></nav>
+  <div class="nav-end">
+    <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">
+      <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg><svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <a class="button small ghost nav-gh" href="https://github.com/zeno-src/zeno-lang"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.3-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
+    <a class="button small" href="/download/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 16.5v1.5a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-1.5"/></svg>Download</a>
+  </div>
+</header>
+<main id="content">
+<div class="doc-layout">
+<nav class="doc-nav" aria-label="Docs"><h4>The front end</h4><a href="/docs/lexer/">How the lexer works</a><a href="/docs/parser/">How the parser works</a><a href="/docs/checker/">How the type checker works</a><h4>The engines</h4><a href="/docs/interpreter/">How the interpreter works</a><a href="/docs/vm/">How the bytecode VM works</a><a href="/docs/compiler/">How compiling to C works</a><a href="/docs/llvm/">How the LLVM backend works</a><a href="/docs/minimal/">The least C: zeno build --minimal</a><h4>Memory</h4><a href="/docs/memory/">How memory is managed</a><a href="/docs/ownership/">Owned values: memory freed at a line you can point to</a><a href="/docs/no-collector/">A build with no collector</a><a href="/docs/pool/">The memory pool</a><a href="/docs/text/">Text that is kept</a><a href="/docs/temporaries/">What a statement owns</a><a href="/docs/one-owner/">One owner</a><a href="/docs/enums-and-none/">Enum values and none, with one owner</a><a href="/docs/functions-and-errors/">Functions and errors, with one owner</a><a href="/docs/memory-modes/">Choosing how memory is freed</a><h4>Firmware and hardware</h4><a href="/docs/firmware/">How a firmware build handles errors</a><a href="/docs/board/">How the board and the clock work</a><a href="/docs/inputs/">Inputs: a pin the program reads</a><a href="/docs/serial/">A serial port</a><a href="/docs/analog/">Reading a voltage: an analog pin</a><a href="/docs/sized-ints/">How the bit operators and the sized whole numbers work</a><a href="/docs/f32/">f32: a float of 32 bits</a><a href="/docs/u64/">u64: a whole number of 64 bits with no sign</a><a href="/docs/fixed-lists/">A list of a fixed length</a><a href="/docs/bytes/">Bytes from and to a file</a><a href="/docs/enum-numbers/">An enum whose cases stand for numbers</a><a href="/docs/units-made/">Units made of units: V  A is W</a><h4>The type system</h4><a href="/docs/generics/">How generics work</a><a href="/docs/interfaces/">Interfaces</a><a href="/docs/private/">private</a><h4>Memory by hand</h4><a href="/docs/unsafe/">Memory by hand: unsafe { }, pointers and registers</a><h4>The standard library</h4><a href="/docs/library/">The standard library, part 1: text and lists</a><a href="/docs/reading-and-writing/">The standard library, part 2: reading and writing</a><a href="/docs/running-programs/">Starting another program</a><a href="/docs/ending-a-program/">Ending a program, its environment, and the error stream</a><a href="/docs/math/">The standard library, part 3: more of math</a><a href="/docs/library-in-zeno/">A library written in Zeno: math.hypot, and the module random</a><a href="/docs/dict/">The standard library, part 4: a dictionary</a><a href="/docs/json/">JSON: text that other programs read and write</a><h4>Programs in many files</h4><a href="/docs/modules/">Programs in several files</a><a href="/docs/using-packages/">Using packages: modules from another folder</a><a href="/docs/registry/">The registry: a package by its name</a><h4>The web</h4><a href="/docs/web/">How a Zeno program runs in a web page</a><a href="/docs/playground/">The playground: Zeno in a page, with nothing installed</a><h4>Other languages</h4><a href="/docs/targets/">Targets: a Zeno program written in another language</a><a href="/docs/python/">Libraries of Python</a><a href="/docs/node/">Libraries of JavaScript</a><a href="/docs/java/">Libraries of Java</a><a href="/docs/ruby/">Libraries of Ruby</a><a href="/docs/php/">Libraries of PHP</a><a href="/docs/lua/">Libraries of Lua</a><a href="/docs/csharp/">Libraries of C# and .NET</a><a href="/docs/c/">Libraries of C, Go and Rust</a><a href="/docs/inline/" aria-current="page">Another language's code in a Zeno file: inline blocks</a><a href="/docs/convert/">A file of Python written again as Zeno: zeno convert</a><h4>Tools</h4><a href="/docs/install/">Installing Zeno: a setup program, and one line</a><a href="/docs/packages/">Packages: Zeno for apt, pacman, snap, flatpak, Homebrew and winget</a><a href="/docs/release/">Releasing Zeno: one zeno for each kind of machine</a><a href="/docs/new/">Starting a program: zeno new</a><a href="/docs/testing/">Tests: test, assert and zeno test</a><a href="/docs/format/">The formatter</a><a href="/docs/lsp/">The language server</a><h4>The audit and 0.1</h4><a href="/docs/audit/">The audit: unambiguous and intuitive</a><a href="/docs/gaps/">The gaps programs ran into: +=, and a format on a quantity</a><a href="/docs/version-0.1/">Zeno 0.1: what is in it, and what is not</a><a href="/docs/found-by-the-book/">What writing the book found</a><h4>More</h4><a href="/docs/board-build/">One step to a board: zeno build --board</a><a href="/docs/dict-owned/">A dict that owns its values</a><a href="/docs/files-in-pieces/">A file in pieces</a><a href="/docs/folders/">Folders</a><a href="/docs/generic-owned/">A value with one owner in a generic</a><a href="/docs/inner-functions/">A function inside a function, and a default that is worked out</a><a href="/docs/interrupts/">Interrupts: the board counts a pin's edges</a><a href="/docs/kept-functions/">A function that is kept takes what it uses</a><a href="/docs/method-values/">A method used as a value</a><a href="/docs/missing/">What Zeno does not have yet, and what to do about each</a><a href="/docs/none-list/">A list of numbers that may be none, with no collector</a><a href="/docs/plain-c/">A compiler that is neither GCC nor Clang</a><a href="/docs/plan-9-14/">The plan for items 9 to 14</a><a href="/docs/pool-size/">The size of the pool on the command line, and spare blocks that are checked</a><a href="/docs/pwm/">A PWM signal: a pin on for a share of the time</a><a href="/docs/raises-in-types/">raises in a function type</a><a href="/docs/resource/">Cleaning up when a block ends</a><a href="/docs/several-values/">Several values from one function</a><a href="/docs/stores/">Stores: where each package manager looks for Zeno</a><a href="/docs/take/">take in front of a field or an item</a><a href="/docs/ticker/">A ticker: a steady beat</a></nav>
+<article class="prose">
+  <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg><a href="/docs/">Docs</a></p>
+  <h1>Another language's code in a Zeno file: inline blocks</h1>
+  
+  <p>Some code is already written, and is in another language: a checksum
+out of a board's firmware, a few lines of Python that use a library, a
+function of JavaScript from a page. An <code>inline</code> block holds it in a
+<code>.zeno</code> file as it was written, and the program calls it.</p>
+<pre><code class="zeno">import c
+
+let bits = inline c {
+    #include &lt;stdint.h&gt;
+
+    /* How many bits of x are 1. */
+    int ones(uint32_t x) {
+        int count = 0;
+        for (; x != 0; x &amp;= x - 1) {
+            count++;
+        }
+        return count;
+    }
+}
+
+print(bits.ones(0xA5))</code></pre>
+<pre><code>4</code></pre>
+<p>What is between the first line and the last <code>}</code> is C, and is not read
+as Zeno. <code>bits</code> is a library of C, as <a href="/docs/c/"><code>c.library</code></a> gives one,
+and <code>ones</code> is a function of it.</p>
+<p>There are three kinds of block:</p>
+<table>
+<thead>
+<tr>
+<th>Written</th>
+<th>Holds</th>
+<th>Gives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inline c { }</code></td>
+<td>C</td>
+<td>A library of C: the functions the block writes out</td>
+</tr>
+<tr>
+<td><code>inline python { }</code></td>
+<td>Python</td>
+<td>A module of Python: what the block defines</td>
+</tr>
+<tr>
+<td><code>inline node { }</code></td>
+<td>JavaScript</td>
+<td>What the block puts in <code>exports</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nothing changes for a program that has no block. A block is asked for
+twice: by the word <code>inline</code>, and by the <code>import</code> of its language at
+the top of the file. The decisions behind it are chapter 61 of
+<a href="/decisions/"><code>decisions.md</code></a>.</p>
+<pre><code>cargo run -- run examples/bits.zeno
+cargo run -- run examples/report.zeno</code></pre>
+<p><a href="/examples/bits/"><code>examples/bits.zeno</code></a> reverses bits, counts
+them and hashes text in C. <a href="/examples/report/"><code>examples/report.zeno</code></a>
+has Python and JavaScript in one file.</p>
+<h2 id="why-not-make-zeno-a-superset-of-c-or-of-python">Why not make Zeno a superset of C, or of Python</h2>
+<p>A superset of a language has to take every program of that language,
+for ever, mistakes and all, and a superset of two languages cannot
+exist where they disagree: <code>a / b</code>, <code>{}</code> and <code>'x'</code> each mean something
+else in C, Python and JavaScript. A block gets the same result with
+none of the cost. The other language's code is used as it is, by that
+language's own compiler, and Zeno stays one language with one set of
+rules.</p>
+<h2 id="what-it-needs">What it needs</h2>
+<p>What the <code>import</code> of the language needs, and nothing more:</p>
+<ul>
+<li><code>inline c</code>: a C compiler, as for <a href="/docs/c/"><code>import c</code></a> and <code>zeno build</code>.</li>
+<li><code>inline python</code>: Python 3, as for <a href="/docs/python/"><code>import python</code></a>.</li>
+<li><code>inline node</code>: Node, as for <a href="/docs/node/"><code>import node</code></a>.</li>
+</ul>
+<h2 id="writing-a-block">Writing a block</h2>
+<pre><code class="zeno">let name = inline c {
+    ...the other language...
+}</code></pre>
+<ul>
+<li><strong>A block is the whole value of a <code>let</code>.</strong> What it has is then used
+  through that name. It may be at the top of a file, in a function, or
+  in a test.</li>
+<li><strong>The first line ends with the <code>{</code>.</strong> <code>inline</code>, the language, <code>{</code>,
+  and the end of the line.</li>
+<li><strong>Everything inside is further in than the line that opens the
+  block.</strong> How far is up to you; <code>zeno format</code> sets it one step in.</li>
+<li><strong>The block ends at a line that holds only <code>}</code></strong>, as far in as the
+  line that opened it.</li>
+</ul>
+<p>That last rule is why a block needs no care. A <code>}</code> of C is always
+further in than the block's own, so it ends nothing. Zeno does not
+look for the other language's strings and comments, and so cannot
+mistake one:</p>
+<pre><code class="zeno">let odd = inline c {
+    /* A } in a comment, */
+    const char *closing(void) { return "} and one in a text"; }
+}</code></pre>
+<p><code>inline</code> is not a reserved word. <code>let inline = 3</code> still means what it
+meant: the word begins a block only when a name and a <code>{</code> that ends
+the line come after it, which nothing else in Zeno can be.</p>
+<p>The indentation that every line of a block shares is not part of the
+block. Each line keeps how far in it is from the others, which in
+Python is part of the program.</p>
+<h2 id="a-block-of-c">A block of C</h2>
+<p><strong>Zeno sees the functions.</strong> Each function that is written out in the
+block, with its body, and is not <code>static</code>, is a function of the
+library. Its types are read from its own first line, so nothing is
+declared a second time:</p>
+<pre><code class="zeno">import c
+
+let frame = inline c {
+    #include &lt;stdint.h&gt;
+    #include &lt;stddef.h&gt;
+
+    #define POLYNOMIAL 0xA001
+
+    static uint16_t step(uint16_t crc) {
+        return (crc &amp; 1) ? (crc &gt;&gt; 1) ^ POLYNOMIAL : crc &gt;&gt; 1;
+    }
+
+    uint16_t crc16(const uint8_t *data, size_t length) {
+        uint16_t crc = 0xFFFF;
+        for (size_t i = 0; i &lt; length; i++) {
+            crc ^= data[i];
+            for (int bit = 0; bit &lt; 8; bit++) {
+                crc = step(crc);
+            }
+        }
+        return crc;
+    }
+}
+
+let request: list[u8] = [0x01, 0x03, 0x00, 0x6B, 0x00, 0x03]
+print(frame.crc16(request, len(request)))</code></pre>
+<pre><code>6004</code></pre>
+<p><code>crc16</code> is a function of <code>frame</code>. <code>step</code> is <code>static</code>, so it is the
+block's own, and so are <code>POLYNOMIAL</code>, a variable, a <code>typedef</code> and a
+<code>struct</code>: they are there for the block's functions, and Zeno leaves
+them alone.</p>
+<p><strong>A call is checked before the program runs</strong>, as a call of a function
+of Zeno is:</p>
+<pre class="out"><code>error: the 1st parameter of `crc16` (`const uint8_t *`) takes a pointer to uint8_t that C gave, a list of whole numbers or none, and this is int
+error: `crc16` takes 2 arguments, but 1 was given
+error: this `inline c` block has no function `step` that Zeno can call. It has: crc16. A function marked `static` is the block's own</code></pre>
+<p><strong>Values go across as they do for <code>c.library</code>.</strong> A whole number is
+checked to fit the type the function takes, a list is lent for a
+pointer and copied back unless the pointer is to <code>const</code>, text goes as
+a <code>const char *</code>, and any other pointer C gives back is kept as it is.
+The table is in <a href="/docs/c/#values-go-across"><code>c.md</code></a>, and it is one table
+for both.</p>
+<p><strong>A header is included as in C.</strong> One of the system in <code>&lt; &gt;</code>, one of
+the program in <code>" "</code>, found from the folder of the <code>.zeno</code> file.</p>
+<p><strong>What the C compiler says names the <code>.zeno</code> file.</strong> A mistake in the
+block is the C compiler's to find, and it is told where each line of
+the block was written:</p>
+<pre class="out"><code>error: C could not build this `inline c` block. The C compiler said:
+sensor.zeno: In function 'twice':
+sensor.zeno:4:31: error: 'y' undeclared (first use in this function)
+    4 |     int twice(int x) { return 2 * y; }
+      |                               ^</code></pre>
+<p>The line is the line of the <code>.zeno</code> file. The column is counted from
+where the lines of the block begin, since the indentation they share
+is not part of the block; the compiler shows the line and marks the
+place.</p>
+<p>A block that does not compile stops the program where the block is.
+No <code>try</code> catches it: the program is wrong, and running it again will
+not help.</p>
+<h3 id="what-zeno-build-does-with-it">What <code>zeno build</code> does with it</h3>
+<p>A build that writes C writes the block into the program's C, as it
+was written, before anything of the program's own. There is no
+library beside the program and nothing between a call and the
+function: <code>frame.crc16(request, len(request))</code> is a call of <code>crc16</code> in
+the same file, which the C compiler may put in line. That is every
+build but <code>--llvm</code>: <code>zeno build</code>, <code>--firmware</code>, <code>--no-collector</code>,
+<code>--owned</code>, <code>--minimal</code>, <code>--release</code>, <code>--fast</code>, <code>--board</code>, and
+<code>zeno test --build</code>.</p>
+<p>The block is marked with where it came from:</p>
+<pre><code>#line 4 "sensor.zeno"
+#include &lt;stdint.h&gt;
+...
+#line 4498 "sensor.c"</code></pre>
+<p>so a mistake the C compiler finds, and a line a debugger stops at, is
+a line of the <code>.zeno</code> file.</p>
+<p>Under <code>zeno run</code> the block is built once into a small library, kept,
+and called through the helper that <code>import c</code> uses; it is built again
+when the block changes. A call goes through the helper there, as a
+call of <code>c.library</code> does. In a built program it is a call of C.</p>
+<h3 id="assembly">Assembly</h3>
+<p>Assembly is written inside a block of C, as the C compiler takes it:</p>
+<pre><code class="zeno">import c
+
+let cpu = inline c {
+    #include &lt;stdint.h&gt;
+
+    /* Interrupts off, on a Cortex-M. What PRIMASK was is given back. */
+    uint32_t interrupts_off(void) {
+        uint32_t was;
+        __asm__ volatile ("mrs %0, primask\n cpsid i" : "=r" (was));
+        return was;
+    }
+}</code></pre>
+<p>There is no <code>inline asm</code>. Assembly has no types, so nothing in it says
+what a routine takes or gives, and the C function around it is what
+says so. It is also not one language: each processor has its own
+instructions and each compiler its own way of writing them, and the C
+compiler already knows both.</p>
+<p>A whole file of assembly is given to <code>c.library</code>, beside the <code>.c</code>
+files it takes: <code>c.library("startup.s", "void reset(void);")</code>. The C
+compiler assembles it, a <code>.s</code> as it is and a <code>.S</code> after reading its
+<code>#include</code> and <code>#define</code> lines.</p>
+<h3 id="what-a-block-of-c-cannot-have">What a block of C cannot have</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>What Zeno says to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A function Zeno cannot call that is not <code>static</code>: one that takes <code>...</code>, a function, or a whole struct</td>
+<td>Mark it <code>static</code> if only the block calls it, or write a function beside it that Zeno can call</td>
+</tr>
+<tr>
+<td>No function Zeno can call</td>
+<td>Write one out, with its body, without <code>static</code></td>
+</tr>
+<tr>
+<td>C++</td>
+<td>Functions of C++ marked <code>extern "C"</code>, built into a library, go to <code>c.library</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-block-of-python">A block of Python</h2>
+<pre><code class="zeno">import python
+
+let stats = inline python {
+    import statistics
+
+    def summary(readings):
+        """The middle and the spread of some readings."""
+        return [statistics.median(readings), statistics.pstdev(readings)]
+}
+
+print(stats.summary([21.5, 22.0, 23.5]))</code></pre>
+<pre><code>[22.0, 0.8498365855987975]</code></pre>
+<p>The block is a module of Python: what <code>python.module</code> would give if
+the lines were in a <code>.py</code> file. Everything it defines is reached with
+a dot: a function, a class, a variable, and a module the block
+imported (<code>stats.statistics</code>). Values go across as for
+<a href="/docs/python/"><code>import python</code></a>.</p>
+<p>The block runs when the program gets to it, once, top to bottom, as a
+module does when it is imported. An error of Python in it stops the
+program, and names the line of the <code>.zeno</code> file:</p>
+<pre class="out"><code>error: this `inline python` block could not be started. Python said: SyntaxError: invalid syntax (report.zeno, line 9)</code></pre>
+<h2 id="a-block-of-javascript">A block of JavaScript</h2>
+<pre><code class="zeno">import node
+
+let written = inline node {
+    exports.number = (value, place) =&gt; new Intl.NumberFormat(place).format(value)
+}
+
+print(written.number(1234567.5, "en-IN"))</code></pre>
+<pre><code>12,34,567.5</code></pre>
+<p>The block is a module of Node, as a <code>.js</code> file is: what it puts in
+<code>exports</code>, or gives <code>module.exports</code>, is what the block gives, and
+<code>require</code> finds the packages <code>npm install</code> put in the program's
+folder. It is a module of the older kind, with <code>require</code> and
+<code>exports</code>; <code>import</code> and <code>export</code> are not read there. Values go across
+as for <a href="/docs/node/"><code>import node</code></a>.</p>
+<h2 id="what-each-command-does-with-a-block">What each command does with a block</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>inline c</code></th>
+<th><code>inline python</code>, <code>inline node</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zeno run</code>, <code>zeno run --vm</code>, <code>zeno test</code></td>
+<td>Built once, kept, and called through the C helper</td>
+<td>Given to the Python or the Node that the <code>import</code> starts</td>
+</tr>
+<tr>
+<td><code>zeno check</code></td>
+<td>The functions and every call of them are checked</td>
+<td>Checked when the program runs</td>
+</tr>
+<tr>
+<td><code>zeno build</code> and every build that writes C</td>
+<td>Written into the program's C</td>
+<td>Refused</td>
+</tr>
+<tr>
+<td><code>zeno check --strict</code></td>
+<td>As <code>zeno check</code></td>
+<td>Refused: what it gives is not known before the program runs</td>
+</tr>
+<tr>
+<td><code>zeno build --llvm</code></td>
+<td>Refused</td>
+<td>Refused</td>
+</tr>
+<tr>
+<td><code>zeno build --target js</code> and the other targets</td>
+<td>Refused</td>
+<td>Refused</td>
+</tr>
+<tr>
+<td>The playground on the website</td>
+<td>Refused: a page has no C compiler</td>
+<td>Refused</td>
+</tr>
+<tr>
+<td><code>zeno format</code></td>
+<td>The lines of the block are left as they are, one step in</td>
+<td>The same</td>
+</tr>
+</tbody>
+</table>
+<p>A refusal is an error with the line of the block, when the program is
+checked or built. A block is never skipped.</p>
+<h2 id="what-zeno-cannot-check">What Zeno cannot check</h2>
+<p>The code in a block is the other language's, and Zeno checks none of
+it. A pointer that is wrong in a block of C damages memory as it does
+in C: a built program stops or goes wrong, and under <code>zeno run</code> the
+helper stops and Zeno says which call it was waiting for. The blocks
+of a program are the lines to read then, and <code>grep -n "inline c"</code>
+finds them all, as <code>grep -n unsafe</code> finds the other lines of that
+kind.</p>
+<h2 id="what-is-not-there-yet">What is not there yet</h2>
+<ul>
+<li><strong>A library for a block.</strong> A block of C that needs a library other
+  than C's own (<code>-lz</code>) has nowhere to say so. Until it has, the code
+  goes in a <code>.c</code> file given to <code>c.library</code> with the library.</li>
+<li><strong>A constant of a block.</strong> A <code>#define</code> or a variable of a block is
+  not seen by Zeno; a function that gives it is. <code>c.library</code> can
+  declare a value (<a href="/docs/c/#values-a-header-names"><code>c.md</code></a>).</li>
+<li><strong>Small types given back as themselves.</strong> A <code>uint16_t</code> comes back
+  as an <code>int</code> and a <code>float</code> as a <code>float</code>, as for <code>c.library</code>.</li>
+<li><strong>Blocks of Ruby, PHP, Lua and C#.</strong> Each has an <code>import</code> already
+  and can be given a block in the same way.</li>
+<li><strong><code>zeno build --llvm</code></strong> with a block of C.</li>
+</ul>
+<h2 id="how-it-is-built">How it is built</h2>
+<ul>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/lexer.rs"><code>src/lexer.rs</code></a>, <code>inline_block</code>: the one place
+  the lexer looks further than two characters ahead, to the end of
+  the line. A block is one token, <code>TokenKind::Inline</code>, that holds the
+  language and the text.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/parser.rs"><code>src/parser.rs</code></a>: <code>ExprKind::Inline</code>, allowed
+  only as the value of a <code>let</code>.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/checker.rs"><code>src/checker.rs</code></a>, <code>inline</code>: asks for the
+  import, and types a block of C with
+  <code>bridge_c::library_of_block</code>.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/bridge_c.rs"><code>src/bridge_c.rs</code></a>, <code>block_declarations</code>:
+  finds the functions of a block of C, and makes of them the lines
+  <code>c.library</code> would have been given. From there a block is a library:
+  the checker, <code>zeno run</code> and <code>zeno build</code> use what <code>import c</code> built.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/inline.rs"><code>src/inline.rs</code></a>: what <code>zeno run</code> does when it
+  gets to a block. A block of Python is compiled by Python's own
+  <code>compile</code>, with as many empty lines before it as the <code>.zeno</code> file
+  has above it, so that Python's line numbers are the file's.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/emit_c.rs"><code>src/emit_c.rs</code></a>, <code>c_libraries</code> and
+  <code>with_blocks_placed</code>: the block in the program's C, and its two
+  <code>#line</code>s.</li>
+<li><a href="https://github.com/zeno-src/zeno-lang/blob/main/src/format.rs"><code>src/format.rs</code></a>, <code>block</code>: the formatter's part.</li>
+</ul>
+<h2 id="things-to-try">Things to try</h2>
+<ol>
+<li>
+<p>Run <code>examples/bits.zeno</code>, then build it and run what was built.
+   Open <code>bits.c</code> and find the block. What is on the line before it,
+   and on the line after?</p>
+</li>
+<li>
+<p>In the first program of this page, write <code>count+++;</code> in the block
+   and run it. Which file and line does the C compiler name?</p>
+</li>
+<li>
+<p>Mark <code>ones</code> as <code>static</code> and run <code>zeno check</code>. Read the message.
+   Then write a second function that is not <code>static</code> and calls it.</p>
+</li>
+<li>
+<p>Write <code>let m = inline python {</code> in a file with no <code>import python</code>,
+   and read what Zeno says.</p>
+</li>
+<li>
+<p>Write a block of Python with a class in it, make an object of the
+   class from Zeno, and call a method. Then do the same with a
+   JavaScript class and <code>node.new</code>.</p>
+</li>
+<li>
+<p>Put a <code>}</code> on a line by itself in the middle of a block of C, as far
+   in as the rest of the block. Does it end the block? Move it out to
+   where the <code>let</code> begins and run <code>zeno check</code> again.</p>
+</li>
+</ol>
+  <p class="source">This page is <a href="https://github.com/zeno-src/zeno-lang/blob/main/docs/inline.md">docs/inline.md</a> in the language repository.</p>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="/docs/c/"><span>Previous</span>Libraries of C, Go and Rust</a><a class="next" href="/docs/convert/"><span>Next</span>A file of Python written again as Zeno: zeno convert</a></nav>
+</article>
+<aside class="doc-toc"><h4>On this page</h4><ul><li><a href="#why-not-make-zeno-a-superset-of-c-or-of-python">Why not make Zeno a superset of C, or of Python</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#writing-a-block">Writing a block</a></li><li><a href="#a-block-of-c">A block of C</a></li><li><a href="#a-block-of-python">A block of Python</a></li><li><a href="#a-block-of-javascript">A block of JavaScript</a></li><li><a href="#what-each-command-does-with-a-block">What each command does with a block</a></li><li><a href="#what-zeno-cannot-check">What Zeno cannot check</a></li><li><a href="#what-is-not-there-yet">What is not there yet</a></li><li><a href="#how-it-is-built">How it is built</a></li><li><a href="#things-to-try">Things to try</a></li></ul></aside>
+</div>
+</main>
+<footer class="foot">
+<div class="foot-inner">
+  <div class="chase" aria-hidden="true">
+    <i class="tick" style="left:50%"></i><i class="tick" style="left:75%"></i><i class="tick" style="left:87.5%"></i>
+    <span class="runner" id="runner"></span><svg class="tortoise" viewBox="0 44 128 80" aria-hidden="true"><g transform="translate(0 6)"><clipPath id="tortoise-shell"><path d="M10 82 A44 44 0 0 1 98 82 Z"/></clipPath><g fill="var(--signal)" clip-path="url(#tortoise-shell)"><rect x="10" y="30" width="41.5" height="60"/><rect x="56.5" y="30" width="17" height="60"/><rect x="78.5" y="30" width="19.5" height="60"/></g><path fill="currentColor" fill-rule="evenodd" d="M4 91 L12 87 H98 C98 76 104 69 111 69 C118 69 123 74 123 81 C123 90 115 96 106 96 H12 Z M22 96 H40 V106 a4 4 0 0 1 -4 4 H26 a4 4 0 0 1 -4 -4 Z M70 96 H88 V106 a4 4 0 0 1 -4 4 H74 a4 4 0 0 1 -4 -4 Z M113.5 77.2 a2.7 2.7 0 1 0 0.01 0 Z"/></g></svg>
+  </div>
+  <div class="chase-text"><p>Every journey is halfway done. Forever.</p><span id="chase-count">The runner has closed 0 of 1 halves</span></div>
+  <p class="foot-about">Zeno of Elea said Achilles can never catch the tortoise: first he must cover half the distance, then half of what is left, without end. It suits a compiler that will always be almost finished. The bar at the top of each page works the same way.</p>
+  <div class="foot-links">
+    <div><h4>Learn</h4><a href="/learn/">The guide</a><a href="/download/">Download</a><a href="/examples/">Examples</a><a href="/packages/">Packages</a><a href="/book/">The Zeno Book</a><a href="/book/zeno-book.pdf">The book as a PDF</a></div>
+    <div><h4>Understand</h4><a href="/docs/">How the compiler works</a><a href="/decisions/">Design decisions</a><a href="/history/">History</a><a href="/roadmap/">Roadmap</a></div>
+    <div><h4>Project</h4><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="https://github.com/zeno-src/zeno-lang">Source on GitHub</a><a href="mailto:contact@zeno-lang.org">contact@zeno-lang.org</a></div>
+  </div>
+  <div class="foot-row"><span>Made by Partha</span><span>Plain HTML, no framework, no build step</span></div>
+</div>
+</footer>
+<script src="/assets/main.js"></script>
+</body>
+</html>

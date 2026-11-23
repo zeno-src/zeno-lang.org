@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>25 Another Language in a Zeno File · The Zeno Book</title>
+  <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="book.css">
+<meta property="og:site_name" content="Zeno">
+<meta property="og:title" content="25 Another Language in a Zeno File · The Zeno Book">
+<meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zeno-lang.org/book/inline.html">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://zeno-lang.org/og/book.png">
+<meta property="og:image:secure_url" content="https://zeno-lang.org/og/book.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="25 Another Language in a Zeno File · The Zeno Book">
+<meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+<meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
+<meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
+<link rel="canonical" href="https://zeno-lang.org/book/inline.html">
+</head>
+<body>
+<header class="bar">
+  <button class="menu" aria-label="Contents" onclick="document.body.classList.toggle('open')">☰</button>
+  <a class="brand" href="index.html">The Zeno Book</a>
+  <span class="version">Zeno 0.8</span>
+  <a class="site" href="https://zeno-lang.org">zeno-lang.org</a>
+</header>
+<div class="layout">
+<aside class="sidebar"><ul>
+<li><a href="preface.html" id="toc-ch-preface">Preface</a></li>
+<li><a href="starting.html" id="toc-starting">Starting</a>
+<ul>
+<li><a href="getting-zeno.html" id="toc-ch-getting-zeno"><span
+class="number">1</span> Getting Zeno</a></li>
+<li><a href="first-program.html" id="toc-ch-first-program"><span
+class="number">2</span> A First Program</a></li>
+<li><a href="tour.html" id="toc-ch-tour"><span
+class="number">3</span> A Tour of Zeno</a></li>
+</ul></li>
+<li><a href="the-language.html" id="toc-the-language">The Language</a>
+<ul>
+<li><a href="values.html" id="toc-ch-values"><span
+class="number">4</span> Values and Variables</a></li>
+<li><a href="numbers.html" id="toc-ch-numbers"><span
+class="number">5</span> Numbers and Operators</a></li>
+<li><a href="text.html" id="toc-ch-text"><span
+class="number">6</span> Text</a></li>
+<li><a href="control-flow.html" id="toc-ch-control-flow"><span
+class="number">7</span> Deciding and Repeating</a></li>
+<li><a href="functions.html" id="toc-ch-functions"><span
+class="number">8</span> Functions</a></li>
+<li><a href="lists.html" id="toc-ch-lists"><span
+class="number">9</span> Lists</a></li>
+<li><a href="dicts.html" id="toc-ch-dicts"><span
+class="number">10</span> Dicts</a></li>
+<li><a href="classes.html" id="toc-ch-classes"><span
+class="number">11</span> Classes</a></li>
+<li><a href="enums.html" id="toc-ch-enums"><span
+class="number">12</span> Enums and match</a></li>
+<li><a href="none.html" id="toc-ch-none"><span
+class="number">13</span> Values That May Be Missing</a></li>
+<li><a href="errors.html" id="toc-ch-errors"><span
+class="number">14</span> When Things Go Wrong</a></li>
+<li><a href="function-values.html" id="toc-ch-function-values"><span
+class="number">15</span> Functions as Values</a></li>
+</ul></li>
+<li><a href="growing-programs.html" id="toc-growing-programs">Growing
+Programs</a>
+<ul>
+<li><a href="types.html" id="toc-ch-types"><span
+class="number">16</span> Types, Written and Worked Out</a></li>
+<li><a href="units.html" id="toc-ch-units"><span
+class="number">17</span> Numbers with Units</a></li>
+<li><a href="sized-numbers.html" id="toc-ch-sized-numbers"><span
+class="number">18</span> Sized Numbers and Bits</a></li>
+<li><a href="generics.html" id="toc-ch-generics"><span
+class="number">19</span> Generics</a></li>
+<li><a href="interfaces.html" id="toc-ch-interfaces"><span
+class="number">20</span> Interfaces</a></li>
+<li><a href="modules.html" id="toc-ch-modules"><span
+class="number">21</span> Programs in Several Files</a></li>
+<li><a href="packages.html" id="toc-ch-packages"><span
+class="number">22</span> Packages</a></li>
+<li><a href="other-languages.html" id="toc-ch-other-languages"><span
+class="number">23</span> Libraries of Other Languages</a></li>
+<li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
+class="number">24</span> Libraries of C</a></li>
+<li><a class="here" href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
+<li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
+class="number">27</span> Reading and Writing</a></li>
+<li><a href="math.html" id="toc-ch-math"><span
+class="number">28</span> Mathematics</a></li>
+<li><a href="testing.html" id="toc-ch-testing"><span
+class="number">29</span> Testing</a></li>
+<li><a href="tools.html" id="toc-ch-tools"><span
+class="number">30</span> The Tools</a></li>
+</ul></li>
+<li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
+a Machine</a>
+<ul>
+<li><a href="board.html" id="toc-ch-board"><span
+class="number">31</span> The Board</a></li>
+<li><a href="compiling.html" id="toc-ch-compiling"><span
+class="number">32</span> Compiling</a></li>
+<li><a href="memory.html" id="toc-ch-memory"><span
+class="number">33</span> Memory</a></li>
+<li><a href="ownership.html" id="toc-ch-ownership"><span
+class="number">34</span> Ownership</a></li>
+<li><a href="firmware.html" id="toc-ch-firmware"><span
+class="number">35</span> Firmware</a></li>
+<li><a href="no-collector.html" id="toc-ch-no-collector"><span
+class="number">36</span> Building with No Collector</a></li>
+<li><a href="unsafe.html" id="toc-ch-unsafe"><span
+class="number">37</span> Unsafe Code</a></li>
+<li><a href="web.html" id="toc-ch-web"><span
+class="number">38</span> A Program in a Web Page</a></li>
+</ul></li>
+<li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
+<ul>
+<li><a href="inside.html" id="toc-ch-inside"><span
+class="number">39</span> Inside Zeno</a></li>
+<li><a href="design.html" id="toc-ch-design"><span
+class="number">40</span> Why Zeno Is as It Is</a></li>
+<li><a href="keywords.html" id="toc-app-keywords"><span
+class="number">A</span> Keywords</a></li>
+<li><a href="operators.html" id="toc-app-operators"><span
+class="number">B</span> Operators</a></li>
+<li><a href="library.html" id="toc-app-library"><span
+class="number">C</span> The Library at a Glance</a></li>
+<li><a href="unit-table.html" id="toc-app-unit-table"><span
+class="number">D</span> Units at a Glance</a></li>
+<li><a href="commands.html" id="toc-app-commands"><span
+class="number">E</span> The zeno Command</a></li>
+<li><a href="error-kinds.html" id="toc-app-error-kinds"><span
+class="number">F</span> Kinds of Error</a></li>
+<li><a href="limits.html" id="toc-app-limits"><span
+class="number">G</span> What Zeno Does Not Have Yet</a></li>
+</ul></li>
+</ul>
+</aside>
+<main>
+<nav class="pager top">
+<a class="prev" href="c-libraries.html" rel="previous">← <span class="number">24</span> Libraries of C</a>
+<a class="next" href="convert.html" rel="next"><span class="number">26</span> A File of Python Written as Zeno →</a>
+</nav>
+<article>
+<h2 class="chapter unnumbered" id="ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</h2>
+<p>Some code is already written, and is in another language: a checksum
+out of a board’s firmware, a few lines of Python that use a library, a
+function of JavaScript from a page. Since 0.9 an <code>inline</code>
+block holds it in a <code>.zeno</code> file as it was written, and the
+program calls it:</p>
+<div class="zenofile">
+<p>ones.zeno</p>
+</div>
+<div class="sourceCode" id="cb1" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> bits = inline c {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stdint.h&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    /* How many bits of x are <span class="dv">1</span>. */</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ones(uint32_t x) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> count = <span class="dv">0</span>;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">for</span> (; x != <span class="dv">0</span>; x &amp;= x - <span class="dv">1</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            count++;</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> count;</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>print(bits.ones(<span class="dv">0xA5</span>))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>4</code></pre>
+<p>What is between the first line and the last <code>}</code> is C, and
+is not read as Zeno. <code>bits</code> is a library of C, as
+<code>c.library</code> gives one (<a
+href="c-libraries.html#ch-c-libraries">Libraries of C</a>), and
+<code>ones</code> is a function of it.</p>
+<p>There are three kinds of block:</p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Written</th>
+<th style="text-align: left;">Holds</th>
+<th style="text-align: left;">Gives</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>inline c</code></td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">a library of C: the functions the block
+writes out</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>inline python</code></td>
+<td style="text-align: left;">Python</td>
+<td style="text-align: left;">a module of Python: what the block
+defines</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>inline node</code></td>
+<td style="text-align: left;">JavaScript</td>
+<td style="text-align: left;">what the block puts in
+<code>exports</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note">
+<p>Nothing changes for a program that has no block. A block is asked for
+twice: by the word <code>inline</code>, and by the <code>import</code>
+of its language at the top of the file. <code>inline</code> is not a
+reserved word, and <code>let inline = 3</code> still means what it
+meant.</p>
+</div>
+<h3 class="unnumbered"
+id="why-zeno-is-not-a-superset-of-c-or-of-python"><span
+class="number">25.1</span> Why Zeno is not a superset of C, or of
+Python</h3>
+<p>It would be one way to use code that is already written: make every
+program of C a program of Zeno, as every program of C is nearly one of
+C++, and every program of JavaScript is one of TypeScript. Zeno does
+not, for three reasons.</p>
+<p>A superset has to take every program of the other language, for ever,
+with every mistake that language allows. The first thing given up would
+be the checks Zeno is for: a sum that cannot overflow unseen, a name
+that cannot be <code>none</code> unseen. A superset of two languages
+cannot exist where they disagree, and <code>a / b</code>,
+<code>{}</code> and <code>'x'</code> each mean something else in C,
+Python and JavaScript. And a superset of one language is a dialect of
+it: TypeScript cannot mend the <code>==</code> of JavaScript.</p>
+<p>A block gets the same result for the person with the code. It is used
+as it is, today, by that language’s own compiler, and Zeno stays one
+language with one set of rules.</p>
+<h3 class="unnumbered" id="what-it-needs-2"><span
+class="number">25.2</span> What it needs</h3>
+<p>What the <code>import</code> of the language needs, and nothing more:
+a C compiler for <code>inline c</code>, as for <code>import c</code> and
+<code>zeno build</code>; Python 3 for <code>inline python</code>; Node
+for <code>inline node</code> (<a
+href="other-languages.html#ch-other-languages">Libraries of Other
+Languages</a>).</p>
+<h3 class="unnumbered" id="writing-a-block"><span
+class="number">25.3</span> Writing a block</h3>
+<div class="sourceCode" id="cb3" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> name = inline c {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...the other language...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><p><strong>A block is the whole value of a
+<code>let</code>.</strong> What it has is then used through that name.
+It may be at the top of a file, in a function, or in a test.</p></li>
+<li><p><strong>The first line ends with the <code>{</code>.</strong>
+<code>inline</code>, the language, <code>{</code>, and the end of the
+line.</p></li>
+<li><p><strong>Everything inside is further in than the line that opens
+the block.</strong> How far is up to you; <code>zeno format</code> sets
+it one step in.</p></li>
+<li><p><strong>The block ends at a line that holds only
+<code>}</code></strong>, as far in as the line that opened it.</p></li>
+</ul>
+<p>That last rule is why a block needs no care. A <code>}</code> of C is
+always further in than the block’s own, so it ends nothing. Zeno does
+not look for the other language’s strings and comments, and so cannot
+mistake one:</p>
+<div class="zenofile">
+<p>odd.zeno</p>
+</div>
+<div class="sourceCode" id="cb4" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> odd = inline c {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    /* A } <span class="kw">in</span> a comment, */</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> char *closing(void) { <span class="kw">return</span> <span class="st">&quot;} and one in a text&quot;</span>; }</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>print(odd.closing())</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>} and one in a text</code></pre>
+<p>The indentation that every line of a block shares is not part of the
+block. Each line keeps how far in it is from the others, which in Python
+is part of the program.</p>
+<div class="why">
+<p>To find the end of a block by counting braces, Zeno would have to
+know what a brace inside a string or a comment looks like in each
+language: <code>"}"</code>, <code>'}'</code>, <code>/* } */</code>, a
+template of JavaScript, a regular expression, a raw string of Python.
+That is a small reader for each language, each wrong somewhere, and the
+mistake it would make is the worst kind: the block ends early, and the
+rest of the other language’s code is read as Zeno. A line that holds
+only <code>}</code> at the first line’s own indentation is found with no
+knowledge of the other language, and can be seen with the eye. It is the
+one place in Zeno where indentation means something, and a line that
+breaks the rule is refused, never guessed at. (Decision 61.3.)</p>
+</div>
+<h3 class="unnumbered" id="a-block-of-c"><span
+class="number">25.4</span> A block of C</h3>
+<p>Each function that is written out in the block, with its body, and is
+not <code>static</code>, is a function of the library. Its types are
+read from its own first line, so nothing is declared a second time:</p>
+<div class="zenofile">
+<p>frame.zeno</p>
+</div>
+<div class="sourceCode" id="cb6" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> frame = inline c {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stdint.h&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stddef.h&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#define POLYNOMIAL 0xA001</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    static uint16_t step(uint16_t crc) {</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> (crc &amp; <span class="dv">1</span>) ? (crc &gt;&gt; <span class="dv">1</span>) ^ POLYNOMIAL : crc &gt;&gt; <span class="dv">1</span>;</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    uint16_t crc16(<span class="kw">const</span> uint8_t *data, size_t length) {</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        uint16_t crc = <span class="dv">0xFFFF</span>;</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">for</span> (size_t i = <span class="dv">0</span>; i &lt; length; i++) {</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            crc ^= data[i];</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="kw">for</span> (<span class="dt">int</span> bit = <span class="dv">0</span>; bit &lt; <span class="dv">8</span>; bit++) {</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                crc = step(crc);</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> crc;</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> request: <span class="dt">list</span>[<span class="dt">u8</span>] = [<span class="dv">0x01</span>, <span class="dv">0x03</span>, <span class="dv">0x00</span>, <span class="dv">0x6B</span>, <span class="dv">0x00</span>, <span class="dv">0x03</span>]</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>print(frame.crc16(request, len(request)))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>6004</code></pre>
+<p><code>crc16</code> is a function of <code>frame</code>.
+<code>step</code> is <code>static</code>, so it is the block’s own, and
+so are <code>POLYNOMIAL</code>, a variable, a <code>typedef</code> and a
+<code>struct</code>: they are there for the block’s functions, and Zeno
+leaves them alone.</p>
+<p>A call is checked before the program runs, as a call of a function of
+Zeno is:</p>
+<div class="zenofile">
+<p>calls.zeno</p>
+</div>
+<div class="sourceCode" id="cb8" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> frame = inline c {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stdint.h&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stddef.h&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    static uint16_t step(uint16_t crc) { <span class="kw">return</span> crc &gt;&gt; <span class="dv">1</span>; }</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    uint16_t crc16(<span class="kw">const</span> uint8_t *data, size_t length) {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        uint16_t crc = <span class="dv">0xFFFF</span>;</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">for</span> (size_t i = <span class="dv">0</span>; i &lt; length; i++) {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            crc = step(crc ^ data[i]);</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> crc;</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>print(frame.crc16(<span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>print(frame.crc16([<span class="dv">1</span>, <span class="dv">2</span>]))</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>print(frame.step(<span class="dv">1</span>))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>$ zeno check calls.zeno
+error: the 1st parameter of `crc16` (`const uint8_t *`) takes a pointer to uint8_t that C gave, a list of whole numbers or none, and this is int
+  --&gt; calls.zeno:18:19
+   |
+18 | print(frame.crc16(3, 1))
+   |                   ^
+
+error: `crc16` takes 2 arguments, but 1 was given
+  --&gt; calls.zeno:19:7
+   |
+19 | print(frame.crc16([1, 2]))
+   |       ^
+
+error: this `inline c` block has no function `step` that Zeno can call. It has: crc16. A function marked `static` is the block&#39;s own
+  --&gt; calls.zeno:20:7
+   |
+20 | print(frame.step(1))
+   |       ^
+
+3 errors found. Nothing was run.</code></pre>
+<p>Values go across as they do for <code>c.library</code>: a whole
+number is checked to fit the type the function takes, a list is lent for
+a pointer and copied back unless the pointer is to <code>const</code>,
+text goes as a <code>const char *</code>, and any other pointer C gives
+back is kept as it is. It is one table for both, and it is in the last
+chapter. A header is included as in C: one of the system in
+<code>&lt; &gt;</code>, one of the program in <code>" "</code>, found
+from the folder of the <code>.zeno</code> file.</p>
+<p>A mistake in the block is the C compiler’s to find, and it is told
+where each line of the block was written, so what it says names the
+<code>.zeno</code> file:</p>
+<div class="zenofile">
+<p>sensor.zeno</p>
+</div>
+<div class="sourceCode" id="cb10" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> lib = inline c {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> twice(<span class="dt">int</span> x) { <span class="kw">return</span> <span class="dv">2</span> * y; }</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>print(lib.twice(<span class="dv">21</span>))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>error: C could not build this `inline c` block. The C compiler said:
+sensor.zeno: In function ‘twice’:
+sensor.zeno:4:31: error: ‘y’ undeclared (first use in this function)
+    4 |     int twice(int x) { return 2 * y; }
+      |                               ^
+sensor.zeno:4:31: note: each undeclared identifier is reported only once for each function it appears in
+ --&gt; sensor.zeno:3:11
+  |
+3 | let lib = inline c {
+  |           ^</code></pre>
+<p>The line is the line of the <code>.zeno</code> file. The column is
+counted from where the lines of the block begin, since the indentation
+they share is not part of the block.</p>
+<p>A block that does not compile stops the program where the block is.
+No <code>try</code> catches it: the program is wrong, and running it
+again will not help.</p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">A block of C cannot have</th>
+<th style="text-align: left;">What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">a function Zeno cannot call that is not
+<code>static</code>: one that takes <code>...</code>, a function, or a
+whole struct</td>
+<td style="text-align: left;">mark it <code>static</code> if only the
+block calls it, or write a function beside it that Zeno can call</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">no function Zeno can call</td>
+<td style="text-align: left;">write one out, with its body, without
+<code>static</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C++</td>
+<td style="text-align: left;">functions of C++ marked
+<code>extern "C"</code>, built into a library, go to
+<code>c.library</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 class="unnumbered" id="what-zeno-build-does-with-a-block"><span
+class="number">25.5</span> What zeno build does with a block</h3>
+<p>A build that writes C writes the block into the program’s C, as it
+was written. There is no library beside the program and nothing between
+a call and the function: <code>frame.crc16(...)</code> is a call of
+<code>crc16</code> in the same file, which the C compiler may put in
+line.</p>
+<pre class="Output" data-language="Output" style="outputstyle"><code>$ zeno build frame.zeno
+Wrote frame.c
+Built frame. Run it with ./frame
+$ ./frame
+6004
+$ zeno build --no-collector --minimal frame.zeno
+Wrote frame.c
+Built frame. Run it with ./frame
+$ ./frame
+6004
+$ grep -c &quot;^#line&quot; frame.c
+2</code></pre>
+<p>Every build that writes C does it: a plain one,
+<code>--firmware</code>, <code>--no-collector</code>,
+<code>--owned</code>, <code>--minimal</code>, <code>--release</code>,
+<code>--fast</code>, <code>--board</code>, and
+<code>zeno test --build</code> (<a
+href="compiling.html#ch-compiling">Compiling</a>). The last line
+above counts the lines of the built C that begin with
+<code>#line</code>. There are two: one before the block, which names the
+<code>.zeno</code> file and the line the block began on, and one after
+it, which gives the lines that follow back to the C file. So a mistake
+the C compiler finds, and a line a debugger stops at, is a line of the
+<code>.zeno</code> file.</p>
+<p>Under <code>zeno run</code> the block is built once into a small
+library, kept, and called through the helper that <code>import c</code>
+uses; it is built again when the block changes.</p>
+<h3 class="unnumbered" id="assembly"><span class="number">25.6</span>
+Assembly</h3>
+<p>Assembly is written inside a block of C, as the C compiler takes
+it:</p>
+<div class="sourceCode" id="cb13" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> c</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> cpu = inline c {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#include &lt;stdint.h&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    /* Interrupts off, on a Cortex-M. What PRIMASK was <span class="kw">is</span> given back. */</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    uint32_t interrupts_off(void) {</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        uint32_t was;</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        __asm__ volatile (<span class="st">&quot;mrs %0, primask\n cpsid i&quot;</span> : <span class="st">&quot;=r&quot;</span> (was));</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> was;</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>There is no <code>inline asm</code>. Assembly has no types, so
+nothing in it says what a routine takes or gives, and the C function
+around it is what says so. It is also not one language: each processor
+has its own instructions and each compiler its own way of writing them,
+and the C compiler already knows both.</p>
+<p>A whole file of assembly is given to <code>c.library</code>, beside
+the <code>.c</code> files it takes:</p>
+<div class="sourceCode" id="cb14" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> start = c.library(<span class="st">&quot;startup.s&quot;</span>, <span class="st">&quot;void reset(void);&quot;</span>)</span></code></pre></div>
+<p>The C compiler assembles it, a <code>.s</code> as it is and a
+<code>.S</code> after reading its <code>#include</code> and
+<code>#define</code> lines.</p>
+<h3 class="unnumbered" id="a-block-of-python"><span
+class="number">25.7</span> A block of Python</h3>
+<div class="zenofile">
+<p>stats.zeno</p>
+</div>
+<div class="sourceCode" id="cb15" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> python</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> stats = inline python {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">import</span> statistics</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    def summary(readings):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&quot;&quot;The middle and the spread of some readings.&quot;&quot;&quot;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> [statistics.median(readings), statistics.pstdev(readings)]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>print(stats.summary([<span class="dv">21.5</span>, <span class="dv">22.0</span>, <span class="dv">23.5</span>]))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>[22.0, 0.8498365855987975]</code></pre>
+<p>The block is a module of Python: what <code>python.module</code>
+would give if the lines were in a <code>.py</code> file. Everything it
+defines is reached with a dot: a function, a class, a variable, and a
+module the block imported (<code>stats.statistics</code>). Values go
+across as for <code>import python</code>.</p>
+<p>The block runs when the program gets to it, once, top to bottom, as a
+module does when it is imported. An error of Python in it stops the
+program, and names the line of the <code>.zeno</code> file:</p>
+<div class="zenofile">
+<p>wrong.zeno</p>
+</div>
+<div class="sourceCode" id="cb17" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> python</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> stats = inline python {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    def summary(readings:</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> max(readings)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>print(stats.summary([<span class="dv">1</span>, <span class="dv">2</span>]))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>error: this `inline python` block could not be started. Python said: SyntaxError: &#39;(&#39; was never closed (wrong.zeno, line 4)
+ --&gt; wrong.zeno:3:13
+  |
+3 | let stats = inline python {
+  |             ^</code></pre>
+<h3 class="unnumbered" id="a-block-of-javascript"><span
+class="number">25.8</span> A block of JavaScript</h3>
+<div class="zenofile">
+<p>written.zeno</p>
+</div>
+<div class="sourceCode" id="cb19" data-language="Zeno"
+style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> node</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> written = inline node {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    exports.number = (value, place) =&gt; new Intl.NumberFormat(place).format(value)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>print(written.number(<span class="dv">1234567.5</span>, <span class="st">&quot;en-IN&quot;</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>print(written.number(<span class="dv">1234567.5</span>, <span class="st">&quot;de-DE&quot;</span>))</span></code></pre></div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>12,34,567.5
+1.234.567,5</code></pre>
+<p>The block is a module of Node, as a <code>.js</code> file is: what it
+puts in <code>exports</code>, or gives <code>module.exports</code>, is
+what the block gives, and <code>require</code> finds the packages
+<code>npm install</code> put in the program’s folder. It is a module of
+the older kind, with <code>require</code> and <code>exports</code>;
+<code>import</code> and <code>export</code> are not read there. Values
+go across as for <code>import node</code>.</p>
+<h3 class="unnumbered" id="what-each-command-does-with-a-block"><span
+class="number">25.9</span> What each command does with a block</h3>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><code>inline c</code></th>
+<th style="text-align: left;"><code>inline python</code>,
+<code>inline node</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>zeno run</code>,
+<code>zeno test</code></td>
+<td style="text-align: left;">built once, kept, and called through the C
+helper</td>
+<td style="text-align: left;">given to the Python or the Node that the
+<code>import</code> starts</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>zeno check</code></td>
+<td style="text-align: left;">the functions and every call of them are
+checked</td>
+<td style="text-align: left;">checked when the program runs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>zeno build</code>, and every build
+that writes C</td>
+<td style="text-align: left;">written into the program’s C</td>
+<td style="text-align: left;">refused</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>zeno check --strict</code></td>
+<td style="text-align: left;">as <code>zeno check</code></td>
+<td style="text-align: left;">refused: what it gives is not known before
+the program runs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>zeno build --llvm</code></td>
+<td style="text-align: left;">refused</td>
+<td style="text-align: left;">refused</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>zeno build --target</code></td>
+<td style="text-align: left;">refused</td>
+<td style="text-align: left;">refused</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">the playground</td>
+<td style="text-align: left;">refused: a page has no C compiler</td>
+<td style="text-align: left;">refused</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>zeno format</code></td>
+<td style="text-align: left;">the lines of the block are left as they
+are, one step in</td>
+<td style="text-align: left;">the same</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A refusal is an error with the line of the block, when the program is
+checked or built. A block is never skipped.</p>
+<h3 class="unnumbered" id="what-zeno-cannot-check"><span
+class="number">25.10</span> What Zeno cannot check</h3>
+<p>The code in a block is the other language’s, and Zeno checks none of
+it. A pointer that is wrong in a block of C damages memory as it does in
+C: a built program stops or goes wrong, and under <code>zeno run</code>
+the helper stops and Zeno says which call it was waiting for. The blocks
+of a program are the lines to read then, and
+<code>grep -n "inline c"</code> finds them all, as
+<code>grep -n unsafe</code> finds the other lines of that kind (<a
+href="unsafe.html#ch-unsafe">Unsafe Code</a>).</p>
+<h3 class="unnumbered" id="what-is-not-there-yet-2"><span
+class="number">25.11</span> What is not there yet</h3>
+<ul>
+<li><p><strong>A library for a block.</strong> A block of C that needs a
+library other than C’s own (<code>-lz</code>) has nowhere to say so.
+Until it has, the code goes in a <code>.c</code> file given to
+<code>c.library</code> with the library.</p></li>
+<li><p><strong>A constant of a block.</strong> A <code>#define</code> or
+a variable of a block is not seen by Zeno; a function that gives it is.
+<code>c.library</code> can declare a value.</p></li>
+<li><p><strong>Small types given back as themselves.</strong> A
+<code>uint16_t</code> comes back as an <code>int</code>, as for
+<code>c.library</code>.</p></li>
+<li><p><strong>Blocks of Ruby, PHP, Lua and C#.</strong> Each has an
+<code>import</code> already and can be given a block in the same
+way.</p></li>
+<li><p><strong><code>zeno build –llvm</code></strong> with a block of
+C.</p></li>
+</ul>
+<h3 class="unnumbered" id="how-it-is-built-2"><span
+class="number">25.12</span> How it is built</h3>
+<p>The lexer decides: <code>inline</code>, a name, a <code>{</code> and
+the end of the line begin a block, and it is the one place the lexer
+looks further than two characters ahead. It reads the lines to the
+closing one and makes of them one token, which holds the language and
+the text. The parser allows that token only as the value of a
+<code>let</code>.</p>
+<p>For a block of C, the checker finds the functions: it goes through
+the text once, stepping over comments, strings, lines that begin with
+<code>#</code> and bodies between braces, and keeps the first line of
+each function that is not <code>static</code>. Those lines are what
+<code>c.library</code> would have been given, and from there a block is
+a library: the checker, <code>zeno run</code> and
+<code>zeno build</code> use what <code>import c</code> built. A block of
+Python is compiled by Python’s own <code>compile</code>, with as many
+empty lines before it as the <code>.zeno</code> file has above it, so
+that the line numbers Python counts are the file’s. The reasons are
+chapter 61 of <code>docs/decisions.md</code>, and
+<code>examples/bits.zeno</code> and <code>examples/report.zeno</code>
+are two whole programs.</p>
+<h3 class="unnumbered" id="things-to-try-2"><span
+class="number">25.13</span> Things to try</h3>
+<ol>
+<li><p>Run <code>examples/bits.zeno</code>, then build it and run what
+was built. Open <code>bits.c</code> and find the block. What is on the
+line before it, and on the line after?</p></li>
+<li><p>In the first program of this chapter, write
+<code>count+++;</code> in the block and run it. Which file and line does
+the C compiler name?</p></li>
+<li><p>Mark <code>ones</code> as <code>static</code> and run
+<code>zeno check</code>. Read the message. Then write a second function
+that is not <code>static</code> and calls it.</p></li>
+<li><p>Write <code>let m = inline python {</code> in a file with no
+<code>import python</code>, and read what Zeno says.</p></li>
+<li><p>Write a block of Python with a class in it, make an object of the
+class from Zeno, and call a method. Then do the same with a class of
+JavaScript and <code>node.new</code>.</p></li>
+<li><p>Put a <code>}</code> on a line by itself in the middle of a block
+of C, as far in as the rest of the block. Does it end the block? Move it
+out to where the <code>let</code> begins and run <code>zeno check</code>
+again.</p></li>
+</ol>
+</article>
+<nav class="pager bottom">
+<a class="prev" href="c-libraries.html" rel="previous">← <span class="number">24</span> Libraries of C</a>
+<a class="next" href="convert.html" rel="next"><span class="number">26</span> A File of Python Written as Zeno →</a>
+</nav>
+<footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
+</main>
+</div>
+</body>
+</html>

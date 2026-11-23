@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>31 Memory · The Zeno Book</title>
+  <title>33 Memory · The Zeno Book</title>
   <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
   </style>
   <link rel="stylesheet" href="book.css">
 <meta property="og:site_name" content="Zeno">
-<meta property="og:title" content="31 Memory · The Zeno Book">
+<meta property="og:title" content="33 Memory · The Zeno Book">
 <meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeno-lang.org/book/memory.html">
@@ -103,7 +103,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="31 Memory · The Zeno Book">
+<meta name="twitter:title" content="33 Memory · The Zeno Book">
 <meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
 <meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
@@ -176,41 +176,45 @@ class="number">22</span> Packages</a></li>
 class="number">23</span> Libraries of Other Languages</a></li>
 <li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
 class="number">24</span> Libraries of C</a></li>
+<li><a href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
 <li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
-class="number">25</span> Reading and Writing</a></li>
+class="number">27</span> Reading and Writing</a></li>
 <li><a href="math.html" id="toc-ch-math"><span
-class="number">26</span> Mathematics</a></li>
+class="number">28</span> Mathematics</a></li>
 <li><a href="testing.html" id="toc-ch-testing"><span
-class="number">27</span> Testing</a></li>
+class="number">29</span> Testing</a></li>
 <li><a href="tools.html" id="toc-ch-tools"><span
-class="number">28</span> The Tools</a></li>
+class="number">30</span> The Tools</a></li>
 </ul></li>
 <li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
 a Machine</a>
 <ul>
 <li><a href="board.html" id="toc-ch-board"><span
-class="number">29</span> The Board</a></li>
+class="number">31</span> The Board</a></li>
 <li><a href="compiling.html" id="toc-ch-compiling"><span
-class="number">30</span> Compiling</a></li>
+class="number">32</span> Compiling</a></li>
 <li><a class="here" href="memory.html" id="toc-ch-memory"><span
-class="number">31</span> Memory</a></li>
+class="number">33</span> Memory</a></li>
 <li><a href="ownership.html" id="toc-ch-ownership"><span
-class="number">32</span> Ownership</a></li>
+class="number">34</span> Ownership</a></li>
 <li><a href="firmware.html" id="toc-ch-firmware"><span
-class="number">33</span> Firmware</a></li>
+class="number">35</span> Firmware</a></li>
 <li><a href="no-collector.html" id="toc-ch-no-collector"><span
-class="number">34</span> Building with No Collector</a></li>
+class="number">36</span> Building with No Collector</a></li>
 <li><a href="unsafe.html" id="toc-ch-unsafe"><span
-class="number">35</span> Unsafe Code</a></li>
+class="number">37</span> Unsafe Code</a></li>
 <li><a href="web.html" id="toc-ch-web"><span
-class="number">36</span> A Program in a Web Page</a></li>
+class="number">38</span> A Program in a Web Page</a></li>
 </ul></li>
 <li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
 <ul>
 <li><a href="inside.html" id="toc-ch-inside"><span
-class="number">37</span> Inside Zeno</a></li>
+class="number">39</span> Inside Zeno</a></li>
 <li><a href="design.html" id="toc-ch-design"><span
-class="number">38</span> Why Zeno Is as It Is</a></li>
+class="number">40</span> Why Zeno Is as It Is</a></li>
 <li><a href="keywords.html" id="toc-app-keywords"><span
 class="number">A</span> Keywords</a></li>
 <li><a href="operators.html" id="toc-app-operators"><span
@@ -230,12 +234,12 @@ class="number">G</span> What Zeno Does Not Have Yet</a></li>
 </aside>
 <main>
 <nav class="pager top">
-<a class="prev" href="compiling.html" rel="previous">← <span class="number">30</span> Compiling</a>
-<a class="next" href="ownership.html" rel="next"><span class="number">32</span> Ownership →</a>
+<a class="prev" href="compiling.html" rel="previous">← <span class="number">32</span> Compiling</a>
+<a class="next" href="ownership.html" rel="next"><span class="number">34</span> Ownership →</a>
 </nav>
 <article>
 <h2 class="chapter unnumbered" id="ch-memory"><span
-class="number">31</span> Memory</h2>
+class="number">33</span> Memory</h2>
 <p>Numbers and bools live in the variables that hold them, and need no
 memory of their own. Text that is built, lists, objects, enum values
 that carry something, and functions that keep variables all need memory
@@ -247,7 +251,7 @@ chapters are about the ways firmware can do without one.</p>
 program, and Rust frees its values for it. Everything here is about
 <code>zeno build</code>.</p>
 <h3 class="unnumbered" id="what-takes-memory"><span
-class="number">31.1</span> What takes memory</h3>
+class="number">33.1</span> What takes memory</h3>
 <ul>
 <li><p>text that is built: <code>a + b</code>, an <code>f</code> string,
 <code>text.upper()</code>;</p></li>
@@ -262,7 +266,7 @@ library’s <code>malloc</code>. The question is when to give each block
 back with <code>free</code>.</p>
 <h3 class="unnumbered"
 id="the-question-nobody-can-answer-in-advance"><span
-class="number">31.2</span> The question nobody can answer in
+class="number">33.2</span> The question nobody can answer in
 advance</h3>
 <div class="sourceCode" id="cb1" data-language="Zeno"
 style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> label(reading: Reading) -&gt; <span class="dt">str</span> {</span>
@@ -280,7 +284,7 @@ or never freeing at all.</p>
 it, directly or through other blocks, nothing can ever use it again, and
 it is safe to free.</p>
 <h3 class="unnumbered" id="mark-and-sweep"><span
-class="number">31.3</span> Mark and sweep</h3>
+class="number">33.3</span> Mark and sweep</h3>
 <p>Zeno’s collector is the oldest and simplest kind. It was invented for
 Lisp in 1960, and it is what MicroPython runs on microcontrollers.</p>
 <ol>
@@ -317,7 +321,7 @@ pages of their own for that reason. When every block counted it, each
 block kept its neighbour alive, and the neighbour its own: a benchmark
 that needed 130 MB held 2.3 GB. (Decision 22.10.)</p>
 <h3 class="unnumbered" id="young-and-old"><span
-class="number">31.4</span> Young and old</h3>
+class="number">33.4</span> Young and old</h3>
 <p>Most blocks are garbage soon after they are made, and a block that
 has lived through one collection usually lives through many. So most
 collections are small: they look only at the blocks made since the last
@@ -340,7 +344,7 @@ whole run, this took the time from 11 seconds to 7. On a chip, and for
 now on Windows, every collection is full. (Decisions 22.10 and
 22.14.)</p>
 <h3 class="unnumbered" id="seeing-it-work"><span
-class="number">31.5</span> Seeing it work</h3>
+class="number">33.5</span> Seeing it work</h3>
 <p><code>zeno build --memory</code> makes a program that reports, as it
 ends, what memory it used. This one, from the <code>examples</code>
 folder, logs a reading every tick for 50 000 ticks, and keeps only the
@@ -426,7 +430,7 @@ could point to, without waiting for the collector: the old storage of a
 list that has just grown, and the copy that a <code>for</code> loop
 walks.</p>
 <h3 class="unnumbered" id="when-it-runs"><span
-class="number">31.6</span> When it runs</h3>
+class="number">33.6</span> When it runs</h3>
 <p>Collecting takes time, in proportion to what it looks at, so it is
 not done on every allocation. The runtime counts the bytes in use and
 collects when they pass a limit; after each collection the limit becomes
@@ -436,7 +440,7 @@ cheaply, and one that keeps a lot is left alone for longer. And if
 runs and the request is tried again. On a board with 64 KB of memory,
 that second trigger is the one that matters.</p>
 <h3 class="unnumbered" id="what-it-costs-1"><span
-class="number">31.7</span> What it costs</h3>
+class="number">33.7</span> What it costs</h3>
 <ul>
 <li><p><strong>Pauses.</strong> While the collector runs, the program
 does not. A small collection’s pause grows with what was made since the
@@ -461,7 +465,7 @@ default, and the next chapters give firmware the other choices where it
 needs them. (Decision 5.7.)</p>
 </div>
 <h3 class="unnumbered" id="three-ways-to-manage-memory"><span
-class="number">31.8</span> Three ways to manage memory</h3>
+class="number">33.8</span> Three ways to manage memory</h3>
 <div class="center">
 <table>
 <thead>
@@ -578,8 +582,8 @@ and check that the memory in use stays low.</p></li>
 </div>
 </article>
 <nav class="pager bottom">
-<a class="prev" href="compiling.html" rel="previous">← <span class="number">30</span> Compiling</a>
-<a class="next" href="ownership.html" rel="next"><span class="number">32</span> Ownership →</a>
+<a class="prev" href="compiling.html" rel="previous">← <span class="number">32</span> Compiling</a>
+<a class="next" href="ownership.html" rel="next"><span class="number">34</span> Ownership →</a>
 </nav>
 <footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
 </main>

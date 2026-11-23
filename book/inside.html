@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>37 Inside Zeno · The Zeno Book</title>
+  <title>39 Inside Zeno · The Zeno Book</title>
   <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
   </style>
   <link rel="stylesheet" href="book.css">
 <meta property="og:site_name" content="Zeno">
-<meta property="og:title" content="37 Inside Zeno · The Zeno Book">
+<meta property="og:title" content="39 Inside Zeno · The Zeno Book">
 <meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeno-lang.org/book/inside.html">
@@ -103,7 +103,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="37 Inside Zeno · The Zeno Book">
+<meta name="twitter:title" content="39 Inside Zeno · The Zeno Book">
 <meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
 <meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
@@ -176,41 +176,45 @@ class="number">22</span> Packages</a></li>
 class="number">23</span> Libraries of Other Languages</a></li>
 <li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
 class="number">24</span> Libraries of C</a></li>
+<li><a href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
 <li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
-class="number">25</span> Reading and Writing</a></li>
+class="number">27</span> Reading and Writing</a></li>
 <li><a href="math.html" id="toc-ch-math"><span
-class="number">26</span> Mathematics</a></li>
+class="number">28</span> Mathematics</a></li>
 <li><a href="testing.html" id="toc-ch-testing"><span
-class="number">27</span> Testing</a></li>
+class="number">29</span> Testing</a></li>
 <li><a href="tools.html" id="toc-ch-tools"><span
-class="number">28</span> The Tools</a></li>
+class="number">30</span> The Tools</a></li>
 </ul></li>
 <li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
 a Machine</a>
 <ul>
 <li><a href="board.html" id="toc-ch-board"><span
-class="number">29</span> The Board</a></li>
+class="number">31</span> The Board</a></li>
 <li><a href="compiling.html" id="toc-ch-compiling"><span
-class="number">30</span> Compiling</a></li>
+class="number">32</span> Compiling</a></li>
 <li><a href="memory.html" id="toc-ch-memory"><span
-class="number">31</span> Memory</a></li>
+class="number">33</span> Memory</a></li>
 <li><a href="ownership.html" id="toc-ch-ownership"><span
-class="number">32</span> Ownership</a></li>
+class="number">34</span> Ownership</a></li>
 <li><a href="firmware.html" id="toc-ch-firmware"><span
-class="number">33</span> Firmware</a></li>
+class="number">35</span> Firmware</a></li>
 <li><a href="no-collector.html" id="toc-ch-no-collector"><span
-class="number">34</span> Building with No Collector</a></li>
+class="number">36</span> Building with No Collector</a></li>
 <li><a href="unsafe.html" id="toc-ch-unsafe"><span
-class="number">35</span> Unsafe Code</a></li>
+class="number">37</span> Unsafe Code</a></li>
 <li><a href="web.html" id="toc-ch-web"><span
-class="number">36</span> A Program in a Web Page</a></li>
+class="number">38</span> A Program in a Web Page</a></li>
 </ul></li>
 <li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
 <ul>
 <li><a class="here" href="inside.html" id="toc-ch-inside"><span
-class="number">37</span> Inside Zeno</a></li>
+class="number">39</span> Inside Zeno</a></li>
 <li><a href="design.html" id="toc-ch-design"><span
-class="number">38</span> Why Zeno Is as It Is</a></li>
+class="number">40</span> Why Zeno Is as It Is</a></li>
 <li><a href="keywords.html" id="toc-app-keywords"><span
 class="number">A</span> Keywords</a></li>
 <li><a href="operators.html" id="toc-app-operators"><span
@@ -231,11 +235,11 @@ class="number">G</span> What Zeno Does Not Have Yet</a></li>
 <main>
 <nav class="pager top">
 <a class="prev" href="inside-zeno.html" rel="previous">← Inside Zeno</a>
-<a class="next" href="design.html" rel="next"><span class="number">38</span> Why Zeno Is as It Is →</a>
+<a class="next" href="design.html" rel="next"><span class="number">40</span> Why Zeno Is as It Is →</a>
 </nav>
 <article>
 <h2 class="chapter unnumbered" id="ch-inside"><span
-class="number">37</span> Inside Zeno</h2>
+class="number">39</span> Inside Zeno</h2>
 <p>Zeno was built to learn how a language is built, so the compiler is
 written to be read. It is a Rust program of about fifty thousand lines,
 with no libraries: the lexer, the parser, the checker, two engines that
@@ -251,7 +255,7 @@ style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><sp
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>print(square(<span class="dv">7</span>))</span></code></pre></div>
 <pre class="Output" data-language="Output" style="outputstyle"><code>49</code></pre>
-<h3 class="unnumbered" id="the-stages"><span class="number">37.1</span>
+<h3 class="unnumbered" id="the-stages"><span class="number">39.1</span>
 The stages</h3>
 <pre class="Output" data-language="Output" style="outputstyle"><code>files -&gt; lexer -&gt; parser -&gt; modules -&gt; checker -+-&gt; interpreter     zeno run
                                                 +-&gt; bytecode -&gt; VM  zeno run --vm
@@ -259,7 +263,7 @@ The stages</h3>
                                                 +-&gt; LLVM IR -&gt; clang  zeno build --llvm</code></pre>
 <p>Each stage takes what the one before it made, and every stage after
 the parser works on the same syntax tree.</p>
-<h3 class="unnumbered" id="the-lexer"><span class="number">37.2</span>
+<h3 class="unnumbered" id="the-lexer"><span class="number">39.2</span>
 The lexer</h3>
 <p>The lexer turns the characters of a file into <em>tokens</em>, the
 words of the language. It looks at one character, and that is enough to
@@ -284,7 +288,7 @@ skipped, which is how a long statement goes on to the next line. The
 lexer reports every mistake it finds, not just the first, because after
 a bad character it can simply skip it and carry on.
 (<code>src/lexer.rs</code>, about 700 lines.)</p>
-<h3 class="unnumbered" id="the-parser"><span class="number">37.3</span>
+<h3 class="unnumbered" id="the-parser"><span class="number">39.3</span>
 The parser</h3>
 <p>The parser turns tokens into a <em>syntax tree</em>: the program’s
 shape, with each expression inside the one it belongs to. It is a
@@ -303,7 +307,7 @@ that show how it grouped every expression. The parser stops at the first
 mistake, because after a syntax error it no longer knows where it is,
 and what follows is usually nonsense caused by the first.
 (<code>src/parser.rs</code>, about 2100 lines.)</p>
-<h3 class="unnumbered" id="modules"><span class="number">37.4</span>
+<h3 class="unnumbered" id="modules"><span class="number">39.4</span>
 Modules</h3>
 <p>The next stage loads every file the program imports, renames each
 top-level name with its module in front, and joins them into one program
@@ -311,7 +315,7 @@ top-level name with its module in front, and joins them into one program
 Every stage after it sees one tree, as if the program had been written
 in one file, so none of them had to learn about files.
 <code>zeno join</code> shows the result.</p>
-<h3 class="unnumbered" id="the-checker"><span class="number">37.5</span>
+<h3 class="unnumbered" id="the-checker"><span class="number">39.5</span>
 The checker</h3>
 <p>The checker walks the tree and works out a type for every expression.
 It is the biggest stage, nearly ten thousand lines, because it is where
@@ -325,7 +329,7 @@ forwards: a parameter’s type comes from the calls, which may be below
 the function. Each pass notes what arrived at every untyped parameter,
 and the next starts from that, until a pass learns nothing new.</p>
 <h3 class="unnumbered" id="two-engines-that-run"><span
-class="number">37.6</span> Two engines that run</h3>
+class="number">39.6</span> Two engines that run</h3>
 <p><strong>The interpreter</strong> walks the tree. For
 <code>n * n</code> it works out the left, then the right, then
 multiplies. It is the simplest way to run a program, and the default for
@@ -370,7 +374,7 @@ Page</a>) is not a fifth engine. <code>zeno.wasm</code> is the lexer,
 parser, checker and interpreter, built by Rust for a browser, and runs
 the program as <code>zeno run</code> does.</p>
 <h3 class="unnumbered" id="two-engines-that-compile"><span
-class="number">37.7</span> Two engines that compile</h3>
+class="number">39.7</span> Two engines that compile</h3>
 <p><strong>The C backend</strong> writes C, as <a
 href="compiling.html#ch-compiling">Compiling</a> showed.
 <code>square</code> becomes:</p>
@@ -402,7 +406,7 @@ fits1:
 <p>Both backends share the C runtime, <code>runtime.c</code>, which
 every compiled program carries: text, lists, printing, errors, the
 collector, the pool, and the board.</p>
-<h3 class="unnumbered" id="agreement"><span class="number">37.8</span>
+<h3 class="unnumbered" id="agreement"><span class="number">39.8</span>
 Agreement</h3>
 <p>Four ways of running one program could easily drift into four
 languages. They do not, because of one rule enforced by the tests: every
@@ -410,7 +414,7 @@ test program is run by the interpreter, the VM, the C build and the LLVM
 build, in the build kinds that apply, and the outputs must be the same,
 byte for byte, error messages included. When a stage is changed, the
 tests show at once which of the others must change with it.</p>
-<h3 class="unnumbered" id="the-files"><span class="number">37.9</span>
+<h3 class="unnumbered" id="the-files"><span class="number">39.9</span>
 The files</h3>
 <div class="center">
 <table>
@@ -526,7 +530,7 @@ and add a token of your own.</p></li>
 </article>
 <nav class="pager bottom">
 <a class="prev" href="inside-zeno.html" rel="previous">← Inside Zeno</a>
-<a class="next" href="design.html" rel="next"><span class="number">38</span> Why Zeno Is as It Is →</a>
+<a class="next" href="design.html" rel="next"><span class="number">40</span> Why Zeno Is as It Is →</a>
 </nav>
 <footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
 </main>

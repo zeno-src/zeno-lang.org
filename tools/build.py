@@ -354,8 +354,8 @@ DOC_GROUPS = [
      ["modules", "using-packages", "registry"]),
     ("The web", "A program in a web page, built to WebAssembly.",
      ["web", "playground"]),
-    ("Other languages", "The program written in fifteen other languages, from JavaScript to Kotlin, and the libraries of Python, JavaScript, Java, Ruby, PHP, Lua, C# and C used from Zeno.",
-     ["targets", "python", "node", "java", "ruby", "php", "lua", "csharp", "c"]),
+    ("Other languages", "The program written in fifteen other languages, from JavaScript to Kotlin, the libraries of Python, JavaScript, Java, Ruby, PHP, Lua, C# and C used from Zeno, another language's code in a Zeno file, and a file of Python written again as Zeno.",
+     ["targets", "python", "node", "java", "ruby", "php", "lua", "csharp", "c", "inline", "convert"]),
     ("Tools", "Installers, packages for apt, Homebrew and the rest, releases, tests, the formatter and the language server.",
      ["install", "packages", "release", "new", "testing", "format", "lsp"]),
     ("The audit and 0.1", "Every feature checked, the gaps real programs found, and what 0.1 holds.",
@@ -811,8 +811,11 @@ DONE = [
     ("Cleaning up when a block ends (0.8)", "An <code>owned class</code> that <code>is Resource</code> has its <code>release</code> run on every way out of the block that holds it.", "resource"),
     ("Folders and files in pieces (0.8)", "<code>files.list</code>, <code>files.make_folder</code> and <code>files.join</code>, and a file read line by line with <code>files.read_from</code> and written with <code>files.write_to</code>.", "files-in-pieces"),
     ("Tests of a compiled program (0.8)", "<code>zeno test --build</code> runs a program's tests in the program C or LLVM makes of it, and an <code>assert</code> can say why it matters.", "testing"),
+    ("Another language in a Zeno file (0.9, not released yet)", "<code>inline c { }</code>, <code>inline python { }</code> and <code>inline node { }</code>: code of another language kept as it was written, and called. A block of C is part of the program's C in every C build, and holds assembly too.", "inline"),
+    ("A file of Python written as Zeno (0.9, not released yet)", "<code>zeno convert shop.py</code> writes <code>shop.zeno</code>: what it can say in Zeno as Zeno, the rest kept in an <code>inline python</code> block, so that what it writes always runs and prints what the Python printed.", "convert"),
 ]
 NEXT = [
+    ("Now", "A file of C written as Zeno", "<code>zeno convert</code> for C, with what it cannot read left in an <code>inline c</code> block."),
     ("Next", "On a real board", "Everything the board module has was tried on two emulated boards. No program of Zeno's has run on real hardware yet."),
     ("Planned", "Tools", "Lines of the program in a debugger, completion and rename in the editor, and a prompt to try things at."),
     ("Planned", "Tasks, async and await", "Several things at once: servers and networking."),

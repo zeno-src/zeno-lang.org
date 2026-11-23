@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>25 Reading and Writing · The Zeno Book</title>
+  <title>27 Reading and Writing · The Zeno Book</title>
   <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
   </style>
   <link rel="stylesheet" href="book.css">
 <meta property="og:site_name" content="Zeno">
-<meta property="og:title" content="25 Reading and Writing · The Zeno Book">
+<meta property="og:title" content="27 Reading and Writing · The Zeno Book">
 <meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeno-lang.org/book/reading-writing.html">
@@ -103,7 +103,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="25 Reading and Writing · The Zeno Book">
+<meta name="twitter:title" content="27 Reading and Writing · The Zeno Book">
 <meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
 <meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
@@ -176,41 +176,45 @@ class="number">22</span> Packages</a></li>
 class="number">23</span> Libraries of Other Languages</a></li>
 <li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
 class="number">24</span> Libraries of C</a></li>
+<li><a href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
 <li><a class="here" href="reading-writing.html" id="toc-ch-reading-writing"><span
-class="number">25</span> Reading and Writing</a></li>
+class="number">27</span> Reading and Writing</a></li>
 <li><a href="math.html" id="toc-ch-math"><span
-class="number">26</span> Mathematics</a></li>
+class="number">28</span> Mathematics</a></li>
 <li><a href="testing.html" id="toc-ch-testing"><span
-class="number">27</span> Testing</a></li>
+class="number">29</span> Testing</a></li>
 <li><a href="tools.html" id="toc-ch-tools"><span
-class="number">28</span> The Tools</a></li>
+class="number">30</span> The Tools</a></li>
 </ul></li>
 <li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
 a Machine</a>
 <ul>
 <li><a href="board.html" id="toc-ch-board"><span
-class="number">29</span> The Board</a></li>
+class="number">31</span> The Board</a></li>
 <li><a href="compiling.html" id="toc-ch-compiling"><span
-class="number">30</span> Compiling</a></li>
+class="number">32</span> Compiling</a></li>
 <li><a href="memory.html" id="toc-ch-memory"><span
-class="number">31</span> Memory</a></li>
+class="number">33</span> Memory</a></li>
 <li><a href="ownership.html" id="toc-ch-ownership"><span
-class="number">32</span> Ownership</a></li>
+class="number">34</span> Ownership</a></li>
 <li><a href="firmware.html" id="toc-ch-firmware"><span
-class="number">33</span> Firmware</a></li>
+class="number">35</span> Firmware</a></li>
 <li><a href="no-collector.html" id="toc-ch-no-collector"><span
-class="number">34</span> Building with No Collector</a></li>
+class="number">36</span> Building with No Collector</a></li>
 <li><a href="unsafe.html" id="toc-ch-unsafe"><span
-class="number">35</span> Unsafe Code</a></li>
+class="number">37</span> Unsafe Code</a></li>
 <li><a href="web.html" id="toc-ch-web"><span
-class="number">36</span> A Program in a Web Page</a></li>
+class="number">38</span> A Program in a Web Page</a></li>
 </ul></li>
 <li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
 <ul>
 <li><a href="inside.html" id="toc-ch-inside"><span
-class="number">37</span> Inside Zeno</a></li>
+class="number">39</span> Inside Zeno</a></li>
 <li><a href="design.html" id="toc-ch-design"><span
-class="number">38</span> Why Zeno Is as It Is</a></li>
+class="number">40</span> Why Zeno Is as It Is</a></li>
 <li><a href="keywords.html" id="toc-app-keywords"><span
 class="number">A</span> Keywords</a></li>
 <li><a href="operators.html" id="toc-app-operators"><span
@@ -230,12 +234,12 @@ class="number">G</span> What Zeno Does Not Have Yet</a></li>
 </aside>
 <main>
 <nav class="pager top">
-<a class="prev" href="c-libraries.html" rel="previous">← <span class="number">24</span> Libraries of C</a>
-<a class="next" href="math.html" rel="next"><span class="number">26</span> Mathematics →</a>
+<a class="prev" href="convert.html" rel="previous">← <span class="number">26</span> A File of Python Written as Zeno</a>
+<a class="next" href="math.html" rel="next"><span class="number">28</span> Mathematics →</a>
 </nav>
 <article>
 <h2 class="chapter unnumbered" id="ch-reading-writing"><span
-class="number">25</span> Reading and Writing</h2>
+class="number">27</span> Reading and Writing</h2>
 <p>A program is more useful when it can take something in and leave
 something behind: lines typed at a keyboard or sent down a serial line,
 words on the command line, files on a disk. This chapter covers all
@@ -344,7 +348,7 @@ style="text-align: left;"><code>files.join(first, second)</code></td>
 </tbody>
 </table>
 </div>
-<h3 class="unnumbered" id="print"><span class="number">25.1</span>
+<h3 class="unnumbered" id="print"><span class="number">27.1</span>
 print</h3>
 <p><code>print</code> shows its values on one line, with a space between
 them, and ends the line. Text is shown as it is; inside a list, it is
@@ -361,7 +365,7 @@ supply=3.30V
 
 after an empty line</code></pre>
 <h3 class="unnumbered" id="reading-lines-input"><span
-class="number">25.2</span> Reading lines: input</h3>
+class="number">27.2</span> Reading lines: input</h3>
 <p><code>input()</code> reads the next line, without its line end. Given
 a question, it prints the question first and stays on that line. When
 there are no more lines, it gives <code>none</code>: at a keyboard that
@@ -411,7 +415,7 @@ sure the program handles it. (Decision 6.18.)</p>
 line, and then <code>input()</code> reads a line from the serial
 port.</p>
 <h3 class="unnumbered" id="the-command-line"><span
-class="number">25.3</span> The command line</h3>
+class="number">27.3</span> The command line</h3>
 <p><code>program.arguments()</code> gives the words written after the
 file, as a list of text. The program’s own name is not in it, so the
 first word is <code>[0]</code>:</p>
@@ -436,7 +440,7 @@ options go before the file: <code>zeno run --vm greet.zeno Ada</code>. A
 compiled program gets the same list from the words after its name:
 <code>./greet Ada Grace</code>.</p>
 <h3 class="unnumbered" id="ending-warning-and-the-environment"><span
-class="number">25.4</span> Ending, warning, and the environment</h3>
+class="number">27.4</span> Ending, warning, and the environment</h3>
 <p>A program that other programs call says how it went with a number
 when it ends: 0 if all went well, anything up to 255 if not. A script
 reads that number with <code>&amp;&amp;</code>, <code></code>|| or
@@ -479,7 +483,7 @@ style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><sp
 <p>A firmware build refuses <code>program.environment</code>: a board
 has no environment. Chapter 34 of <code>docs/decisions.md</code> gives
 the reasons for all three.</p>
-<h3 class="unnumbered" id="files"><span class="number">25.5</span>
+<h3 class="unnumbered" id="files"><span class="number">27.5</span>
 Files</h3>
 <div class="sourceCode" id="cb12" data-language="Zeno"
 style="zenostyle"><pre class="sourceCode Zeno"><code class="sourceCode zeno"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> files</span>
@@ -614,7 +618,7 @@ could hold anything. Write <code>[u8(n) for n in numbers]</code> to say
 where the check is made. The errors are those of
 <code>files.read</code>: no file, or one that cannot be read. (Decision
 36.1.)</p>
-<h3 class="unnumbered" id="folders"><span class="number">25.6</span>
+<h3 class="unnumbered" id="folders"><span class="number">27.6</span>
 Folders</h3>
 <p><code>files.make_folder</code> makes a folder, and every folder above
 it that is not there yet. <code>files.list</code> gives the names in a
@@ -707,7 +711,7 @@ there <code>files.list</code> and <code>files.make_folder</code> raise a
 <code>files.join</code> works anywhere. There is no way yet to remove a
 folder. (Decisions 59.21 to 59.23.)</p>
 <h3 class="unnumbered" id="a-file-in-pieces"><span
-class="number">25.7</span> A file in pieces</h3>
+class="number">27.7</span> A file in pieces</h3>
 <p><code>files.read</code> reads a whole file into one text. A log of a
 gigabyte, or a file that grows while the program runs, wants a line or a
 few bytes at a time. <code>files.read_from</code> opens a file to be
@@ -833,7 +837,7 @@ six small built-ins, so a program that never reads a file in pieces
 carries none of it. (Decisions 59.6 and 59.7; new in 0.8.)</p>
 </div>
 <h3 class="unnumbered" id="a-worked-example-a-log-book"><span
-class="number">25.8</span> A worked example: a log book</h3>
+class="number">27.8</span> A worked example: a log book</h3>
 <p>This program keeps a log of readings in a file. Each run adds the
 readings given on the command line, then prints every reading so far and
 their average:</p>
@@ -871,7 +875,7 @@ average 21.75
 $ zeno run logbook.zeno 23.5
 3 readings: [21.5, 22.0, 23.5]
 average 22.33</code></pre>
-<h3 class="unnumbered" id="json"><span class="number">25.9</span>
+<h3 class="unnumbered" id="json"><span class="number">27.9</span>
 JSON</h3>
 <p>Programs hand each other text in one format more than any other:
 <em>JSON</em>. A server answers in it, and a program keeps its settings
@@ -981,8 +985,8 @@ file with <code>files.exists</code>.</p></li>
 </div>
 </article>
 <nav class="pager bottom">
-<a class="prev" href="c-libraries.html" rel="previous">← <span class="number">24</span> Libraries of C</a>
-<a class="next" href="math.html" rel="next"><span class="number">26</span> Mathematics →</a>
+<a class="prev" href="convert.html" rel="previous">← <span class="number">26</span> A File of Python Written as Zeno</a>
+<a class="next" href="math.html" rel="next"><span class="number">28</span> Mathematics →</a>
 </nav>
 <footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
 </main>
