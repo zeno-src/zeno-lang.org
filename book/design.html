@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>40 Why Zeno Is as It Is · The Zeno Book</title>
+  <title>41 Why Zeno Is as It Is · The Zeno Book</title>
   <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
   </style>
   <link rel="stylesheet" href="book.css">
 <meta property="og:site_name" content="Zeno">
-<meta property="og:title" content="40 Why Zeno Is as It Is · The Zeno Book">
+<meta property="og:title" content="41 Why Zeno Is as It Is · The Zeno Book">
 <meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeno-lang.org/book/design.html">
@@ -39,7 +39,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="40 Why Zeno Is as It Is · The Zeno Book">
+<meta name="twitter:title" content="41 Why Zeno Is as It Is · The Zeno Book">
 <meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
 <meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
 <meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
@@ -116,41 +116,43 @@ class="number">24</span> Libraries of C</a></li>
 class="number">25</span> Another Language in a Zeno File</a></li>
 <li><a href="convert.html" id="toc-ch-convert"><span
 class="number">26</span> A File of Python Written as Zeno</a></li>
+<li><a href="convert-c.html" id="toc-ch-convert-c"><span
+class="number">27</span> A File of C Written as Zeno</a></li>
 <li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
-class="number">27</span> Reading and Writing</a></li>
+class="number">28</span> Reading and Writing</a></li>
 <li><a href="math.html" id="toc-ch-math"><span
-class="number">28</span> Mathematics</a></li>
+class="number">29</span> Mathematics</a></li>
 <li><a href="testing.html" id="toc-ch-testing"><span
-class="number">29</span> Testing</a></li>
+class="number">30</span> Testing</a></li>
 <li><a href="tools.html" id="toc-ch-tools"><span
-class="number">30</span> The Tools</a></li>
+class="number">31</span> The Tools</a></li>
 </ul></li>
 <li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
 a Machine</a>
 <ul>
 <li><a href="board.html" id="toc-ch-board"><span
-class="number">31</span> The Board</a></li>
+class="number">32</span> The Board</a></li>
 <li><a href="compiling.html" id="toc-ch-compiling"><span
-class="number">32</span> Compiling</a></li>
+class="number">33</span> Compiling</a></li>
 <li><a href="memory.html" id="toc-ch-memory"><span
-class="number">33</span> Memory</a></li>
+class="number">34</span> Memory</a></li>
 <li><a href="ownership.html" id="toc-ch-ownership"><span
-class="number">34</span> Ownership</a></li>
+class="number">35</span> Ownership</a></li>
 <li><a href="firmware.html" id="toc-ch-firmware"><span
-class="number">35</span> Firmware</a></li>
+class="number">36</span> Firmware</a></li>
 <li><a href="no-collector.html" id="toc-ch-no-collector"><span
-class="number">36</span> Building with No Collector</a></li>
+class="number">37</span> Building with No Collector</a></li>
 <li><a href="unsafe.html" id="toc-ch-unsafe"><span
-class="number">37</span> Unsafe Code</a></li>
+class="number">38</span> Unsafe Code</a></li>
 <li><a href="web.html" id="toc-ch-web"><span
-class="number">38</span> A Program in a Web Page</a></li>
+class="number">39</span> A Program in a Web Page</a></li>
 </ul></li>
 <li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
 <ul>
 <li><a href="inside.html" id="toc-ch-inside"><span
-class="number">39</span> Inside Zeno</a></li>
+class="number">40</span> Inside Zeno</a></li>
 <li><a class="here" href="design.html" id="toc-ch-design"><span
-class="number">40</span> Why Zeno Is as It Is</a></li>
+class="number">41</span> Why Zeno Is as It Is</a></li>
 <li><a href="keywords.html" id="toc-app-keywords"><span
 class="number">A</span> Keywords</a></li>
 <li><a href="operators.html" id="toc-app-operators"><span
@@ -170,18 +172,18 @@ class="number">G</span> What Zeno Does Not Have Yet</a></li>
 </aside>
 <main>
 <nav class="pager top">
-<a class="prev" href="inside.html" rel="previous">← <span class="number">39</span> Inside Zeno</a>
+<a class="prev" href="inside.html" rel="previous">← <span class="number">40</span> Inside Zeno</a>
 <a class="next" href="keywords.html" rel="next"><span class="number">A</span> Keywords →</a>
 </nav>
 <article>
 <h2 class="chapter unnumbered" id="ch-design"><span
-class="number">40</span> Why Zeno Is as It Is</h2>
+class="number">41</span> Why Zeno Is as It Is</h2>
 <p>Every chapter of this book has had boxes that give the reason for a
 choice. This last chapter steps back and looks at the choices together:
 the principles they come from, what Zeno took from the languages before
 it, what it left out on purpose, and what it does not have yet.</p>
 <h3 class="unnumbered" id="unambiguous-and-intuitive"><span
-class="number">40.1</span> Unambiguous and intuitive</h3>
+class="number">41.1</span> Unambiguous and intuitive</h3>
 <p>One sentence was set down at the start, and every feature was held to
 it: <em>the entire language must be unambiguous and intuitive</em>.
 Unambiguous means a line has one reading, and a reader never has to work
@@ -191,7 +193,7 @@ message from the compiler bridged them: <code>elif</code>,
 <code>&amp;&amp;</code>, <code>def</code> and <code>;</code> are each
 met with the Zeno spelling.</p>
 <h3 class="unnumbered" id="the-five-principles"><span
-class="number">40.2</span> The five principles</h3>
+class="number">41.2</span> The five principles</h3>
 <p>Most decisions fall out of five principles. When two choices are
 otherwise equal, the one higher on the list wins.</p>
 <ol>
@@ -216,7 +218,7 @@ runtime.</p></li>
 used it, because more people can read Python than any other
 language.</p>
 <h3 class="unnumbered" id="what-came-from-where"><span
-class="number">40.3</span> What came from where</h3>
+class="number">41.3</span> What came from where</h3>
 <p>Zeno set out to blend the good parts of the big languages. Here is
 where each part came from:</p>
 <div class="center">
@@ -279,7 +281,7 @@ generics and its one layout for every file</td>
 </table>
 </div>
 <h3 class="unnumbered" id="what-was-left-out-and-why"><span
-class="number">40.4</span> What was left out, and why</h3>
+class="number">41.4</span> What was left out, and why</h3>
 <p>As much of Zeno’s design is in what it does not have:</p>
 <dl>
 <dt>No null that can appear anywhere.</dt>
@@ -327,7 +329,7 @@ used.</p>
 <p>Each of these is something a language before Zeno had, and that
 somebody, somewhere, lost an afternoon to.</p>
 <h3 class="unnumbered" id="how-decisions-were-made"><span
-class="number">40.5</span> How decisions were made</h3>
+class="number">41.5</span> How decisions were made</h3>
 <p>Every decision in Zeno has a written reason, in the file
 <code>docs/decisions.md</code> of the repository: what was decided, why,
 and what was turned down. A decision made on less than it deserved was
@@ -339,7 +341,7 @@ choice should change.</p>
 <p>The decisions are numbered, and the boxes in this book cite them, so
 anyone who wants the full argument for a rule can find it.</p>
 <h3 class="unnumbered" id="what-zeno-does-not-have-yet"><span
-class="number">40.6</span> What Zeno does not have yet</h3>
+class="number">41.6</span> What Zeno does not have yet</h3>
 <p>Every limit is refused today with a message, so each can be added
 later without changing what any program written now means. The main
 ones:</p>
@@ -359,7 +361,7 @@ small and fast enough for a game.</p></li>
 </ul>
 <p><a href="limits.html#app-limits">Appendix G</a> has the full
 list.</p>
-<h3 class="unnumbered" id="the-name"><span class="number">40.7</span>
+<h3 class="unnumbered" id="the-name"><span class="number">41.7</span>
 The name</h3>
 <p>Zeno is named after Zeno of Elea, whose paradoxes say that Achilles
 can never catch the tortoise: before he reaches it, he must reach
@@ -379,7 +381,7 @@ reason for every choice down.</p>
 </div>
 </article>
 <nav class="pager bottom">
-<a class="prev" href="inside.html" rel="previous">← <span class="number">39</span> Inside Zeno</a>
+<a class="prev" href="inside.html" rel="previous">← <span class="number">40</span> Inside Zeno</a>
 <a class="next" href="keywords.html" rel="next"><span class="number">A</span> Keywords →</a>
 </nav>
 <footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>

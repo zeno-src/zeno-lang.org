@@ -354,8 +354,8 @@ DOC_GROUPS = [
      ["modules", "using-packages", "registry"]),
     ("The web", "A program in a web page, built to WebAssembly.",
      ["web", "playground"]),
-    ("Other languages", "The program written in fifteen other languages, from JavaScript to Kotlin, the libraries of Python, JavaScript, Java, Ruby, PHP, Lua, C# and C used from Zeno, another language's code in a Zeno file, and a file of Python written again as Zeno.",
-     ["targets", "python", "node", "java", "ruby", "php", "lua", "csharp", "c", "inline", "convert"]),
+    ("Other languages", "The program written in fifteen other languages, from JavaScript to Kotlin, the libraries of Python, JavaScript, Java, Ruby, PHP, Lua, C# and C used from Zeno, another language's code in a Zeno file, and a file of Python or of C written again as Zeno.",
+     ["targets", "python", "node", "java", "ruby", "php", "lua", "csharp", "c", "inline", "convert", "convert-c"]),
     ("Tools", "Installers, packages for apt, Homebrew and the rest, releases, tests, the formatter and the language server.",
      ["install", "packages", "release", "new", "testing", "format", "lsp"]),
     ("The audit and 0.1", "Every feature checked, the gaps real programs found, and what 0.1 holds.",
@@ -813,9 +813,10 @@ DONE = [
     ("Tests of a compiled program (0.8)", "<code>zeno test --build</code> runs a program's tests in the program C or LLVM makes of it, and an <code>assert</code> can say why it matters.", "testing"),
     ("Another language in a Zeno file (0.9, not released yet)", "<code>inline c { }</code>, <code>inline python { }</code> and <code>inline node { }</code>: code of another language kept as it was written, and called. A block of C is part of the program's C in every C build, and holds assembly too.", "inline"),
     ("A file of Python written as Zeno (0.9, not released yet)", "<code>zeno convert shop.py</code> writes <code>shop.zeno</code>: what it can say in Zeno as Zeno, the rest kept in an <code>inline python</code> block, so that what it writes always runs and prints what the Python printed.", "convert"),
+    ("A file of C written as Zeno (0.9, not released yet)", "<code>zeno convert meter.c</code> writes <code>meter.zeno</code> with C's numbers bit for bit: <code>uint8_t</code> to <code>uint32_t</code> go round as in C, structs are classes copied where C copies, and what it cannot write stays C in an <code>inline c</code> block.", "convert-c"),
 ]
 NEXT = [
-    ("Now", "A file of C written as Zeno", "<code>zeno convert</code> for C, with what it cannot read left in an <code>inline c</code> block."),
+    ("Now", "TypeScript and JavaScript written as Zeno", "<code>zeno convert</code> for TypeScript and JavaScript, with what it cannot read left in an <code>inline node</code> block."),
     ("Next", "On a real board", "Everything the board module has was tried on two emulated boards. No program of Zeno's has run on real hardware yet."),
     ("Planned", "Tools", "Lines of the program in a debugger, completion and rename in the editor, and a prompt to try things at."),
     ("Planned", "Tasks, async and await", "Several things at once: servers and networking."),

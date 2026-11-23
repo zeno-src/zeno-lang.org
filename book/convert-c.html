@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>27 A File of C Written as Zeno · The Zeno Book</title>
+  <meta name="description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="book.css">
+<meta property="og:site_name" content="Zeno">
+<meta property="og:title" content="27 A File of C Written as Zeno · The Zeno Book">
+<meta property="og:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zeno-lang.org/book/convert-c.html">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://zeno-lang.org/og/book.png">
+<meta property="og:image:secure_url" content="https://zeno-lang.org/og/book.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Zeno Book: the whole language, in one book.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="27 A File of C Written as Zeno · The Zeno Book">
+<meta name="twitter:description" content="The Zeno Book: the whole Zeno programming language, from the first program to the last corner.">
+<meta name="twitter:image" content="https://zeno-lang.org/og/book.png">
+<meta name="twitter:image:alt" content="The Zeno Book: the whole language, in one book.">
+<link rel="canonical" href="https://zeno-lang.org/book/convert-c.html">
+</head>
+<body>
+<header class="bar">
+  <button class="menu" aria-label="Contents" onclick="document.body.classList.toggle('open')">☰</button>
+  <a class="brand" href="index.html">The Zeno Book</a>
+  <span class="version">Zeno 0.8</span>
+  <a class="site" href="https://zeno-lang.org">zeno-lang.org</a>
+</header>
+<div class="layout">
+<aside class="sidebar"><ul>
+<li><a href="preface.html" id="toc-ch-preface">Preface</a></li>
+<li><a href="starting.html" id="toc-starting">Starting</a>
+<ul>
+<li><a href="getting-zeno.html" id="toc-ch-getting-zeno"><span
+class="number">1</span> Getting Zeno</a></li>
+<li><a href="first-program.html" id="toc-ch-first-program"><span
+class="number">2</span> A First Program</a></li>
+<li><a href="tour.html" id="toc-ch-tour"><span
+class="number">3</span> A Tour of Zeno</a></li>
+</ul></li>
+<li><a href="the-language.html" id="toc-the-language">The Language</a>
+<ul>
+<li><a href="values.html" id="toc-ch-values"><span
+class="number">4</span> Values and Variables</a></li>
+<li><a href="numbers.html" id="toc-ch-numbers"><span
+class="number">5</span> Numbers and Operators</a></li>
+<li><a href="text.html" id="toc-ch-text"><span
+class="number">6</span> Text</a></li>
+<li><a href="control-flow.html" id="toc-ch-control-flow"><span
+class="number">7</span> Deciding and Repeating</a></li>
+<li><a href="functions.html" id="toc-ch-functions"><span
+class="number">8</span> Functions</a></li>
+<li><a href="lists.html" id="toc-ch-lists"><span
+class="number">9</span> Lists</a></li>
+<li><a href="dicts.html" id="toc-ch-dicts"><span
+class="number">10</span> Dicts</a></li>
+<li><a href="classes.html" id="toc-ch-classes"><span
+class="number">11</span> Classes</a></li>
+<li><a href="enums.html" id="toc-ch-enums"><span
+class="number">12</span> Enums and match</a></li>
+<li><a href="none.html" id="toc-ch-none"><span
+class="number">13</span> Values That May Be Missing</a></li>
+<li><a href="errors.html" id="toc-ch-errors"><span
+class="number">14</span> When Things Go Wrong</a></li>
+<li><a href="function-values.html" id="toc-ch-function-values"><span
+class="number">15</span> Functions as Values</a></li>
+</ul></li>
+<li><a href="growing-programs.html" id="toc-growing-programs">Growing
+Programs</a>
+<ul>
+<li><a href="types.html" id="toc-ch-types"><span
+class="number">16</span> Types, Written and Worked Out</a></li>
+<li><a href="units.html" id="toc-ch-units"><span
+class="number">17</span> Numbers with Units</a></li>
+<li><a href="sized-numbers.html" id="toc-ch-sized-numbers"><span
+class="number">18</span> Sized Numbers and Bits</a></li>
+<li><a href="generics.html" id="toc-ch-generics"><span
+class="number">19</span> Generics</a></li>
+<li><a href="interfaces.html" id="toc-ch-interfaces"><span
+class="number">20</span> Interfaces</a></li>
+<li><a href="modules.html" id="toc-ch-modules"><span
+class="number">21</span> Programs in Several Files</a></li>
+<li><a href="packages.html" id="toc-ch-packages"><span
+class="number">22</span> Packages</a></li>
+<li><a href="other-languages.html" id="toc-ch-other-languages"><span
+class="number">23</span> Libraries of Other Languages</a></li>
+<li><a href="c-libraries.html" id="toc-ch-c-libraries"><span
+class="number">24</span> Libraries of C</a></li>
+<li><a href="inline.html" id="toc-ch-inline"><span
+class="number">25</span> Another Language in a Zeno File</a></li>
+<li><a href="convert.html" id="toc-ch-convert"><span
+class="number">26</span> A File of Python Written as Zeno</a></li>
+<li><a class="here" href="convert-c.html" id="toc-ch-convert-c"><span
+class="number">27</span> A File of C Written as Zeno</a></li>
+<li><a href="reading-writing.html" id="toc-ch-reading-writing"><span
+class="number">28</span> Reading and Writing</a></li>
+<li><a href="math.html" id="toc-ch-math"><span
+class="number">29</span> Mathematics</a></li>
+<li><a href="testing.html" id="toc-ch-testing"><span
+class="number">30</span> Testing</a></li>
+<li><a href="tools.html" id="toc-ch-tools"><span
+class="number">31</span> The Tools</a></li>
+</ul></li>
+<li><a href="zeno-on-a-machine.html" id="toc-zeno-on-a-machine">Zeno on
+a Machine</a>
+<ul>
+<li><a href="board.html" id="toc-ch-board"><span
+class="number">32</span> The Board</a></li>
+<li><a href="compiling.html" id="toc-ch-compiling"><span
+class="number">33</span> Compiling</a></li>
+<li><a href="memory.html" id="toc-ch-memory"><span
+class="number">34</span> Memory</a></li>
+<li><a href="ownership.html" id="toc-ch-ownership"><span
+class="number">35</span> Ownership</a></li>
+<li><a href="firmware.html" id="toc-ch-firmware"><span
+class="number">36</span> Firmware</a></li>
+<li><a href="no-collector.html" id="toc-ch-no-collector"><span
+class="number">37</span> Building with No Collector</a></li>
+<li><a href="unsafe.html" id="toc-ch-unsafe"><span
+class="number">38</span> Unsafe Code</a></li>
+<li><a href="web.html" id="toc-ch-web"><span
+class="number">39</span> A Program in a Web Page</a></li>
+</ul></li>
+<li><a href="inside-zeno.html" id="toc-inside-zeno">Inside Zeno</a>
+<ul>
+<li><a href="inside.html" id="toc-ch-inside"><span
+class="number">40</span> Inside Zeno</a></li>
+<li><a href="design.html" id="toc-ch-design"><span
+class="number">41</span> Why Zeno Is as It Is</a></li>
+<li><a href="keywords.html" id="toc-app-keywords"><span
+class="number">A</span> Keywords</a></li>
+<li><a href="operators.html" id="toc-app-operators"><span
+class="number">B</span> Operators</a></li>
+<li><a href="library.html" id="toc-app-library"><span
+class="number">C</span> The Library at a Glance</a></li>
+<li><a href="unit-table.html" id="toc-app-unit-table"><span
+class="number">D</span> Units at a Glance</a></li>
+<li><a href="commands.html" id="toc-app-commands"><span
+class="number">E</span> The zeno Command</a></li>
+<li><a href="error-kinds.html" id="toc-app-error-kinds"><span
+class="number">F</span> Kinds of Error</a></li>
+<li><a href="limits.html" id="toc-app-limits"><span
+class="number">G</span> What Zeno Does Not Have Yet</a></li>
+</ul></li>
+</ul>
+</aside>
+<main>
+<nav class="pager top">
+<a class="prev" href="convert.html" rel="previous">← <span class="number">26</span> A File of Python Written as Zeno</a>
+<a class="next" href="reading-writing.html" rel="next"><span class="number">28</span> Reading and Writing →</a>
+</nav>
+<article>
+<h2 class="chapter unnumbered" id="ch-convert-c"><span
+class="number">27</span> A File of C Written as Zeno</h2>
+<p><code>zeno convert</code> reads C as well as Python. The promise is
+the one of the last chapter: what it writes is never silently wrong.
+What it can say in Zeno it says in Zeno, with the numbers C would give,
+bit for bit, and what it cannot it keeps as C, in an
+<code>inline c</code> block that the Zeno calls.</p>
+<h3 class="unnumbered" id="a-first-file-1"><span
+class="number">27.1</span> A first file</h3>
+<p>Here is a small meter, in C:</p>
+<div class="zenofile">
+<p>meter.c</p>
+</div>
+<pre class="Output" data-language="Output" style="outputstyle"><code>/* A meter: readings, an average, and a checksum. */
+#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+
+#define COUNT 5
+
+struct Reading {
+    const char *name;
+    int value;
+};
+
+uint8_t checksum(const uint8_t *bytes, int count) {
+    uint8_t sum = 0;
+    for (int i = 0; i &lt; count; i++) {
+        sum += bytes[i];
+    }
+    return (uint8_t)~sum;
+}
+
+int average(const struct Reading readings[], int count) {
+    int total = 0;
+    for (int i = 0; i &lt; count; i++) {
+        total += readings[i].value;
+    }
+    return total / count;
+}
+
+void limits(const struct Reading readings[], int count, int *low, int *high) {
+    *low = readings[0].value;
+    *high = readings[0].value;
+    for (int i = 1; i &lt; count; i++) {
+        if (readings[i].value &lt; *low) *low = readings[i].value;
+        if (readings[i].value &gt; *high) *high = readings[i].value;
+    }
+}
+
+uint32_t tick(void) {
+    static uint32_t count = 0;
+    return ++count;
+}
+
+int main(void) {
+    struct Reading readings[COUNT] = {
+        {&quot;volts&quot;, 230}, {&quot;amps&quot;, 12}, {&quot;hertz&quot;, 50}, {&quot;watts&quot;, 2760}, {&quot;temp&quot;, -4},
+    };
+    for (int i = 0; i &lt; COUNT; i++) {
+        printf(&quot;%-6s %5d\n&quot;, readings[i].name, readings[i].value);
+    }
+    int low, high;
+    limits(readings, COUNT, &amp;low, &amp;high);
+    printf(&quot;average %d, low %d, high %d\n&quot;, average(readings, COUNT), low, high);
+    uint8_t frame[] = {0x10, 0x20, 0xF0};
+    printf(&quot;checksum 0x%02X\n&quot;, checksum(frame, sizeof frame));
+    uint32_t first = tick();
+    printf(&quot;tick %u, tick %u\n&quot;, first, tick());
+    return 0;
+}</code></pre>
+<p>One command writes <code>meter.zeno</code> beside it:</p>
+<pre class="Output" data-language="Output" style="outputstyle"><code>$ zeno convert meter.c
+Wrote meter.zeno from meter.c.
+  9 pieces: 8 written as Zeno, 1 kept as C.
+
+  Kept as C, in the `inline c` block:
+    line 38, function `tick`: `static count`, a variable inside a function that keeps its value from one call to the next (line 39)
+
+  Run it with `zeno run meter.zeno`. It prints what the C program prints,
+  but for the notes above.</code></pre>
+<p>This is the Zeno it wrote:</p>
+<pre class="Output" data-language="Output" style="outputstyle"><code>$ cat meter.zeno
+# kept: 1
+# A meter: readings, an average, and a checksum.
+
+import c
+
+let c_part = inline c {
+    #include &lt;stdio.h&gt;
+    #include &lt;stdint.h&gt;
+    #define COUNT 5
+    struct Reading {
+        const char *name;
+        int value;
+    };
+
+    uint32_t tick(void) {
+        static uint32_t count = 0;
+        return ++count;
+    }
+}
+
+# C&#39;s `/` of two whole numbers takes the quotient toward zero, where Zeno&#39;s `//`
+# takes it down: -7 / 2 is -3 in C, and -7 // 2 is -4.
+function c_divide(a: int, b: int) -&gt; int {
+    let down = a // b
+    if down &lt; 0 and down * b != a {
+        return down + 1
+    }
+    return down
+}
+
+let COUNT = 5
+
+class Reading {
+    name: str
+    value: int
+}
+
+function checksum(bytes: list[u8], count: int) -&gt; u8 {
+    var sum_: u8 = 0
+    for i in range(0, count) {
+        sum_ = u8.wrap(sum_ + bytes[i])
+    }
+    return u8.wrap(~sum_)
+}
+
+function average(readings: list[Reading], count: int) -&gt; int {
+    var total = 0
+    for i in range(0, count) {
+        total += readings[i].value
+    }
+    return c_divide(total, count)
+}
+
+function limits(readings: list[Reading], count: int, low: list[int], high: list[int]) {
+    low[0] = readings[0].value
+    high[0] = readings[0].value
+    for i in range(1, count) {
+        if readings[i].value &lt; low[0] {
+            low[0] = readings[i].value
+        }
+        if readings[i].value &gt; high[0] {
+            high[0] = readings[i].value
+        }
+    }
+}
+
+# `tick` is kept as C, in the block above.
+
+function main() {
+    let readings = [Reading(&quot;volts&quot;, 230), Reading(&quot;amps&quot;, 12), Reading(&quot;hertz&quot;, 50), Reading(&quot;watts&quot;, 2760), Reading(&quot;temp&quot;, -4)]
+    for i in range(0, COUNT) {
+        print(f&quot;{readings[i].name:&lt;6} {readings[i].value:5}&quot;)
+    }
+    var low = 0
+    var high = 0
+    let low_box = [low]
+    let high_box = [high]
+    limits(readings, COUNT, low_box, high_box)
+    low = low_box[0]
+    high = high_box[0]
+    print(f&quot;average {average(readings, COUNT)}, low {low}, high {high}&quot;)
+    let frame: list[u8] = [0x10, 0x20, 0xF0]
+    print(f&quot;checksum 0x{checksum(frame, 3):02X}&quot;)
+    let first: u32 = u32(c_part.tick())
+    print(f&quot;tick {first}, tick {c_part.tick()}&quot;)
+}
+
+main()</code></pre>
+<p><code>tick</code> keeps a count from one call to the next in a
+<code>static</code> variable, which Zeno has no word for, so it stays C
+and <code>main</code> calls it as <code>c_part.tick()</code>. The rest
+is Zeno. The struct is a class and the arrays are lists.
+<code>sum += bytes[i]</code> on a <code>uint8_t</code> goes round at 256
+as it does in C, written <code>u8.wrap</code>.
+<code>total / count</code> takes the quotient toward zero as C does,
+through a short helper with a comment that says why. The two pointers
+that <code>limits</code> writes through are lists of one: the caller
+puts <code>low</code> in <code>low_box</code>, makes the call, and takes
+it out again.</p>
+<p>Both print the same:</p>
+<pre class="Output" data-language="Output" style="outputstyle"><code>$ zeno run meter.zeno
+volts    230
+amps      12
+hertz     50
+watts   2760
+temp      -4
+average 609, low -4, high 2760
+checksum 0xDF
+tick 1, tick 2
+$ cc -o meter meter.c
+$ ./meter
+volts    230
+amps      12
+hertz     50
+watts   2760
+temp      -4
+average 609, low -4, high 2760
+checksum 0xDF
+tick 1, tick 2</code></pre>
+<h3 class="unnumbered" id="the-numbers-are-cs"><span
+class="number">27.2</span> The numbers are C’s</h3>
+<p>The converter reads each type as C does on a 64-bit machine, and
+writes the type of Zeno that gives the same sums:</p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">C</th>
+<th style="text-align: left;">Zeno</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>uint8_t</code>,
+<code>uint16_t</code>, <code>uint32_t</code></td>
+<td style="text-align: left;"><code>u8</code>, <code>u16</code>,
+<code>u32</code>, with <code>wrap</code> where C goes round</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>char</code>, <code>short</code>,
+<code>int</code>, <code>long</code></td>
+<td style="text-align: left;"><code>int</code>, and a store into a
+smaller type is checked</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>size_t</code>,
+<code>uint64_t</code></td>
+<td style="text-align: left;"><code>int</code>, where the value is never
+below zero; else kept</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>float</code>,
+<code>double</code></td>
+<td style="text-align: left;"><code>f32</code>, <code>float</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>char *</code> holding a text</td>
+<td style="text-align: left;"><code>str</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>struct</code></td>
+<td style="text-align: left;">a class</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">an array</td>
+<td style="text-align: left;">a list</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A signed sum that goes past the top is undefined in C, so no answer
+is C’s: Zeno stops with <code>OverflowError</code>, and the report says
+where a store into a smaller type is checked. <code>/</code> and
+<code>%</code> of whole numbers that may be below zero go through
+<code>c_divide</code> and <code>c_remainder</code>, which take the
+quotient toward zero; when both sides are never below zero they are
+<code>//</code> and <code>%</code>.</p>
+<div class="note">
+<p>A <code>uint64_t</code> is written as an <code>int</code>, so a sum
+past <span class="math inline">2<sup>63</sup></span> stops the program
+where C goes on to <span class="math inline">2<sup>64</sup></span> and
+round. That is loud, never wrong; but a hash of 64 bits stops where C’s
+goes on, and is better left in the block for now.</p>
+</div>
+<h3 class="unnumbered" id="structs-and-pointers"><span
+class="number">27.3</span> Structs and pointers</h3>
+<p>A struct is a value in C and a class is shared in Zeno. So the
+converter writes a copy, <code>a.copy()</code>, wherever C copies:
+<code>b = a;</code>, a struct put into an array, or given to a function
+that changes it. Where nothing can tell, as for a struct a function only
+reads, it writes none.</p>
+<p>Pointers are of a few kinds, and the converter writes four of
+them:</p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">A pointer that</th>
+<th style="text-align: left;">Is written as</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">is indexed, or is an array parameter</td>
+<td style="text-align: left;">a list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">points to one number written through</td>
+<td style="text-align: left;">a list of one</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">points to a struct</td>
+<td style="text-align: left;">the object</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">is <code>const char *</code></td>
+<td style="text-align: left;">a text</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Everything else a pointer does is kept: a pointer variable, pointer
+sums, <code>NULL</code>, <code>malloc</code>, a list made of
+<code>next</code> pointers. C does those well, and they have no Zeno
+that would read as Zeno.</p>
+<h3 class="unnumbered" id="what-is-kept-and-what-crosses"><span
+class="number">27.4</span> What is kept, and what crosses</h3>
+<p>C can call only C, so a function that kept C calls is kept too. A
+variable lives on one side, so a global that kept C uses is kept, and so
+is Zeno that uses it. The Zeno calls the block with numbers, floats,
+bools and texts that C does not change; a call that would give it a
+struct or an array is kept. The block gets every <code>#include</code>,
+<code>#define</code>, struct and enum of the file, so the kept C is
+compiled as it was.</p>
+<p>A line of the preprocessor that chooses (<code>#if</code>,
+<code>#ifdef</code>) keeps the whole file, since it is two programs and
+the converter would have to pick one. A
+<code>main(int argc, char **argv)</code> is kept and given the program’s
+arguments, so <code>zeno run tool.zeno a b</code> gives it what
+<code>./tool a b</code> would.</p>
+<h3 class="unnumbered" id="what-it-does-not-promise-1"><span
+class="number">27.5</span> What it does not promise</h3>
+<p>What C leaves undefined: a signed sum past the top and an index past
+the end make Zeno stop, and a variable C left without a value starts at
+0. The order C works out the arguments of one call in is left to the
+compiler; Zeno’s is left to right. <code>long</code> is read as 64 bits,
+as everywhere but Windows. The rest is in
+<code>docs/convert-c.md</code>.</p>
+<h3 class="unnumbered" id="how-it-is-checked-1"><span
+class="number">27.6</span> How it is checked</h3>
+<p>The programs of C in <code>tools/convert</code> are each built with
+<code>cc</code> and run, converted and run with <code>zeno run</code>,
+and what the two print and the status they end with are compared. Among
+them are a ring buffer, a frame parser and a state machine as they are
+written for a board, and all of that is written as Zeno, with nothing
+kept. As for Python, the converter reads what it wrote with Zeno’s own
+checker before it writes the file.</p>
+</article>
+<nav class="pager bottom">
+<a class="prev" href="convert.html" rel="previous">← <span class="number">26</span> A File of Python Written as Zeno</a>
+<a class="next" href="reading-writing.html" rel="next"><span class="number">28</span> Reading and Writing →</a>
+</nav>
+<footer>Every program in this book was run with Zeno while the book was built. Every journey is halfway done. Forever.</footer>
+</main>
+</div>
+</body>
+</html>
