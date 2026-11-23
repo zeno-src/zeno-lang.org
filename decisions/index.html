@@ -18389,7 +18389,11 @@ the two to share its local variables, which they cannot (62.3).</p>
 <td><code>int</code>, and a store into a smaller one checked (<code>i32(...)</code>)</td>
 </tr>
 <tr>
-<td><code>uint64_t</code>, <code>size_t</code>, <code>unsigned long</code></td>
+<td><code>uint64_t</code>, <code>unsigned long</code>, <code>unsigned long long</code></td>
+<td><code>u64</code>, with <code>u64.wrap(...)</code> where C goes round</td>
+</tr>
+<tr>
+<td><code>size_t</code></td>
 <td><code>int</code>, where the value can never be below zero; else kept</td>
 </tr>
 <tr>
@@ -18406,13 +18410,19 @@ the two to share its local variables, which they cannot (62.3).</p>
 wrong by one bit is worse than none. Zeno has <code>u8</code>, <code>u16</code>, <code>u32</code> and
 <code>f32</code> (2.8, chapter 41), so the sums that matter on a board can be written
 exactly.</p>
-<p><strong>Why <code>size_t</code> is an <code>int</code>.</strong> Zeno's <code>u64</code> (chapter 42) meets an <code>int</code>
-only through <code>u64( )</code>, and <code>size_t</code> counts and indexes beside <code>int</code> on
-nearly every line, so as <code>u64</code> the Zeno would be a cast on every line.
-As <code>int</code> it reads as Zeno, and the converter keeps what could differ:
-<code>-</code> or <code>~</code> of one, or one beside a number that may be below zero. A sum
-past 2**63 stops with <code>OverflowError</code> where C goes on: loud, and in
-63.13.</p>
+<p><strong>Why <code>size_t</code> is an <code>int</code>, and <code>uint64_t</code> a <code>u64</code>.</strong> Zeno's <code>u64</code>
+(chapter 42) meets an <code>int</code> only through <code>u64( )</code>. A <code>size_t</code> counts
+and indexes beside <code>int</code> on nearly every line and is never past 2**63,
+so as a <code>u64</code> the Zeno would be a cast on every line for nothing; as an
+<code>int</code> it reads as Zeno, and the converter keeps what could differ (<code>-</code>
+or <code>~</code> of one, or one beside a number that may be below zero). A
+<code>uint64_t</code> is asked for where all 64 bits matter: a hash, a random
+generator, a register. So it is a <code>u64</code>, and an <code>int</code> beside one is
+made a <code>u64</code> as C makes it, <code>u64(n)</code> when it is never below zero and
+<code>u64.wrap(n)</code> when it may be, which is C's conversion exactly.</p>
+<p><strong>Where the wrap goes.</strong> <code>u64.wrap</code> reaches through <code>+ - * &lt;&lt;</code> inside
+it (42.6) but not through <code>&amp; | ^ ~</code>, so the sides of those are cut
+first: <code>h ^= u64.wrap(h &lt;&lt; 13)</code>.</p>
 <p><strong>A wrap where it is looked at.</strong> <code>a + b + c</code> of <code>u32</code> is one
 <code>u32.wrap(a + b + c)</code>, not three, since going round once at the end
 gives the same bits as going round at each step, as long as the sum
@@ -18542,24 +18552,21 @@ stops the program (63.3), and the last line written in parts is ended
 <h3 id="6313-what-is-not-promised">63.13 What is not promised</h3>
 <p>What C leaves undefined (a signed overflow, an index past the end, a
 variable read before it has a value: Zeno stops on the first two, and
-gives the third 0); a 64-bit unsigned number past 2**63, which stops
-the Zeno (63.2); the order C works out the arguments of one call
-in; <code>long</code> as 32 bits, as on Windows; the last digit of <code>sin</code>. Each is
+gives the third 0); a <code>size_t</code> past 2**63, which stops the Zeno
+(63.2); the order C works out the arguments of one call in; <code>long</code> as 32 bits, as on Windows; the last digit of <code>sin</code>. Each is
 in <code>convert-c.md</code>.</p>
 <h3 id="6314-how-it-is-checked">63.14 How it is checked</h3>
 <p>As 62.19, with the C compiled by <code>cc -std=c11</code> and run: what it prints
 and the status it ends with must be what <code>zeno run</code> gives. The first
 line of each program, <code>// kept: N</code>, is how many pieces are to be kept.
 The programs are in <code>tools/convert/*.c</code>: a ring buffer, frame parser
-and state machine as they are written for a board, a sieve, unsigned
-sums at each size, structs, pointers, <code>switch</code>, <code>printf</code> in parts, a
+and state machine as they are written for a board, a hash of 64 bits
+and two random generators, a sieve, unsigned sums at each size, structs, pointers, <code>switch</code>, <code>printf</code> in parts, a
 <code>main</code> that reads its arguments, and a file the preprocessor changes.</p>
 <h3 id="6315-left-for-later">63.15 Left for later</h3>
 <ul>
 <li><code>--declare header.h</code>, to write the declarations of <code>c.library</code> from a
   header (62.21).</li>
-<li><code>uint64_t</code> as <code>u64</code> where it never meets an <code>int</code> (a hash, a
-  register of 64 bits), so that it goes round as C's does.</li>
 <li>Pointer variables that only walk an array (<code>p++</code> over <code>values</code>), as
   an index.</li>
 <li><code>%e</code> and <code>%g</code>, as Zeno gets a way to show them.</li>

@@ -322,9 +322,14 @@ Windows, which it does not follow), pointers 64.</p>
 <td>Goes round at 2**32</td>
 </tr>
 <tr>
-<td><code>unsigned long</code>, <code>uint64_t</code>, <code>size_t</code></td>
+<td><code>uint64_t</code>, <code>unsigned long</code>, <code>unsigned long long</code></td>
+<td><code>u64</code></td>
+<td>Goes round at 2**64, written <code>u64.wrap(...)</code>. An <code>int</code> beside one is made a <code>u64</code> as C makes it: <code>u64(n)</code>, or <code>u64.wrap(n)</code> when it may be below zero</td>
+</tr>
+<tr>
+<td><code>size_t</code></td>
 <td><code>int</code></td>
-<td>They count and index, beside <code>int</code> on nearly every line, and Zeno's <code>u64</code> meets an <code>int</code> only through <code>u64( )</code>. So they are <code>int</code>, and what could differ is kept: <code>-</code> or <code>~</code> of one, or one beside a number that may be below zero</td>
+<td>It counts bytes and items, never past 2**63, and stands beside <code>int</code> on nearly every line, which a <code>u64</code> meets only through <code>u64( )</code>. What could differ is kept: <code>-</code> or <code>~</code> of one, or one beside a number that may be below zero</td>
 </tr>
 <tr>
 <td><code>float</code></td>
@@ -371,9 +376,11 @@ Windows, which it does not follow), pointers 64.</p>
 <h3 id="sums">Sums</h3>
 <p>Every sum gives what C gives:</p>
 <ul>
-<li><strong>Unsigned</strong> (<code>u8</code>, <code>u16</code>, <code>u32</code>): a sum that goes past the top goes
-  round, written <code>u8.wrap(...)</code>, <code>u32.wrap(...)</code>. It is written only
-  where the value is looked at or stored, so <code>a + b + c</code> is one wrap.
+<li><strong>Unsigned</strong> (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>): a sum that goes past the
+  top goes round, written <code>u8.wrap(...)</code> ... <code>u64.wrap(...)</code>. It is
+  written only where the value is looked at or stored, so <code>a + b + c</code>
+  is one wrap. A hash of 64 bits reads as it does in C:
+  <code>hash = u64.wrap(hash * FNV_PRIME)</code>, <code>h ^= u64.wrap(h &lt;&lt; 13)</code>.
   A product of two <code>u32</code> that may need more than 62 bits goes through a
   helper <code>times_u32</code>, so it does not stop with <code>OverflowError</code> before
   it is cut.</li>
@@ -601,10 +608,9 @@ at its first place of each kind, and the report lists the lines:</p>
 <li><strong>The order C works out the arguments of one call in</strong>: <code>f(next(),
   next())</code> is left to the compiler in C; Zeno works them out left to
   right.</li>
-<li><strong>A 64-bit unsigned number past 2**63</strong>: <code>uint64_t</code> and <code>size_t</code>
-  are written as <code>int</code>, so a sum that goes past <code>int.max</code> stops the
-  program with <code>OverflowError</code>, where C goes on to 2**64 and round.
-  Loud, never wrong, but a hash of 64 bits stops where C's goes on.</li>
+<li><strong>A <code>size_t</code> past 2**63</strong>, or a <code>uint64_t</code> past it stored in a
+  signed <code>long</code>: both are <code>int</code> in Zeno, and stop the program with
+  <code>OverflowError</code> where C would go on. Loud, never wrong.</li>
 <li><strong><code>long</code> as 32 bits</strong>, as on Windows: the converter reads it as 64.</li>
 <li><strong>The last digit of <code>sin</code>, <code>cos</code> and the like</strong>, which comes from
   the C library of the machine.</li>
@@ -619,7 +625,8 @@ with <code>cc -std=c11</code> and run, converted and run with <code>zeno run</co
 the two print and the status they end with are compared. The first line
 of each says how many pieces are to be kept (<code>// kept: 1</code>). Among them
 are a ring buffer, a frame parser and a state machine as they are
-written for a board (<code>firmware.c</code>), a sieve of primes, unsigned sums at
+written for a board (<code>firmware.c</code>), a hash of 64 bits and two random
+generators (<code>hashes.c</code>), a sieve of primes, unsigned sums at
 each size, structs copied and changed, pointers to one number and
 arrays, <code>switch</code>, <code>printf</code> in parts, a <code>main</code> that reads its
 arguments, and a file with <code>#ifdef</code> that is kept whole. The GitHub workflow <code>convert.yml</code> runs them on every push
